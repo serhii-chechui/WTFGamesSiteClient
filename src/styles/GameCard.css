@@ -1,0 +1,99 @@
+.game-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 960px;
+    margin: 0 auto;
+    gap: 24px;
+}
+
+@media (min-width: 768px) {
+    .game-card {
+        flex-direction: row;
+        gap: 40px;
+    }
+}
+
+.game-icon img {
+    width: 160px;
+    height: 160px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.game-content {
+    flex: 1;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .game-content {
+        text-align: left;
+    }
+}
+
+.game-title {
+    font-size: 32px;
+    font-weight: 900;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.game-description {
+    font-size: 18px;
+    color: #444444;
+    margin-top: 12px;
+}
+
+.game-actions {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+@media (min-width: 768px) {
+    .game-actions {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+.play-button {
+    background-color: #ff3e3e;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 999px;
+    padding: 14px 28px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.play-button:hover {
+    background-color: #e33333;
+}
+
+.store-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.store-buttons:hover {
+    cursor: pointer;
+}
+
+.store-buttons img {
+    height: 48px;
+    object-fit: contain;
+}
+
+.store-buttons img:hover {
+    cursor: pointer;
+}
