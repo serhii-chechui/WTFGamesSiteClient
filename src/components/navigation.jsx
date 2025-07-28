@@ -50,11 +50,11 @@ const Navigation = () => {
                                     Applications
                                 </a>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <a className="nav-link" href="/careers">
                                     Careers
                                 </a>
-                            </li>
+                            </li> */}
                         </ul>
 
                         {/* Social Media Icons */}
@@ -72,7 +72,7 @@ const Navigation = () => {
                             <li className="nav-item">
                                 <a
                                     className="nav-link"
-                                    href="https://linkedin.com"
+                                    href="https://www.linkedin.com/groups/8502086/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
