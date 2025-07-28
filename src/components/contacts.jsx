@@ -12,7 +12,7 @@ const Contact = () => {
             <div className="mt-4">
                 <h5>Email</h5>
                 <p>
-                    <a href="mailto:ghost201087@gmail.com">ghost201087@gmail.com</a>
+                    <a href="mailto:business@wtfgames.com.ua">business@wtfgames.com.ua</a>
                 </p>
 
                 <h5>Business Inquiries</h5>

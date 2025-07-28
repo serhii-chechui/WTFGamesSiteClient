@@ -7,7 +7,7 @@ import MainPage from "./components/MainPage";
 import Footer from "./components/footer";
 import PrivacyPolicy from "./components/privacyPolicy";
 import TermOFService from "./components/termsOfService";
-import Contacts from "./components/contacts";
+import Contacts from "./components/Contacts";
 
 function App() {
     return (
