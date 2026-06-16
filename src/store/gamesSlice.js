@@ -4,7 +4,7 @@ import axios from "axios";
 // Async action — загрузка игр с API
 export const fetchGames = createAsyncThunk("games/fetchGames", async (_, thunkAPI) => {
     try {
-        const response = await axios.get("http://wtfgames-api-production.up.railway.app/api/games");
+        const response = await axios.get("https://wtfgames-api-production.up.railway.app/api/games");
         return response.data;
     } catch (err) {
         return thunkAPI.rejectWithValue(err.message);
