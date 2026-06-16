@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Navigation from "./components/navigation";
 import Games from "./components/Games";
+import Application from "./components/Application";
 import MainPage from "./components/MainPage";
 import Footer from "./components/footer";
 import PrivacyPolicy from "./components/privacyPolicy";
@@ -17,6 +18,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<MainPage />} />
                     <Route path="/games" element={<Games />} />
+                    <Route path="/applications" element={<Application />} />
                     <Route path="/privacy" element={<PrivacyPolicy />} />
                     <Route path="/terms" element={<TermOFService />} />
                     <Route path="/contact" element={<Contacts />} />
