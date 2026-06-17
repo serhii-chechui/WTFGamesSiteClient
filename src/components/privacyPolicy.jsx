@@ -1,5 +1,7 @@
 // src/pages/PrivacyPolicy.jsx
 import React from "react";
+import { NavLink } from "react-router-dom";
+import "../styles/PirvacyPolicy.css";
 
 const PrivacyPolicy = () => {
     return (
@@ -19,8 +21,8 @@ const PrivacyPolicy = () => {
 
             <p>
                 If you have any questions about this Policy, please contact us at:{" "}
-                <a href="mailto:ghost201087@gmail.com">
-                    <strong>ghost201087@gmail.com</strong>
+                <a href="mailto:serhii.chechui@gmail.com">
+                    <strong>serhii.chechui@gmail.com</strong>
                 </a>
             </p>
 
@@ -36,9 +38,9 @@ const PrivacyPolicy = () => {
             </p>
             <p>
                 We use GameAnalytics to collect such data. More at{" "}
-                <a href="https://gameanalytics.com/privacy/" target="_blank" rel="noopener noreferrer">
+                <NavLink to="/privacy" target="_blank" rel="noopener noreferrer">
                     GameAnalytics Privacy Policy
-                </a>
+                </NavLink>
                 .
             </p>
 
@@ -72,7 +74,7 @@ const PrivacyPolicy = () => {
             <h2>9. Children’s Privacy</h2>
             <p>If under 13, guardian consent is required. We do not knowingly collect data from children under 13.</p>
 
-            <p>© 2023–2025 WTFGames. All Rights Reserved.</p>
+            <p>© 2023–2026 WTFGames. All Rights Reserved.</p>
         </div>
     );
 };

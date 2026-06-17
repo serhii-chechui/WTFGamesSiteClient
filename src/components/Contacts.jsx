@@ -1,5 +1,6 @@
 // src/pages/Contact.jsx
 import React from "react";
+import "../styles/Contacts.css";
 
 const Contact = () => {
     return (
@@ -12,7 +13,7 @@ const Contact = () => {
             <div className="mt-4">
                 <h5>Email</h5>
                 <p>
-                    <a href="mailto:business@wtfgames.com.ua">business@wtfgames.com.ua</a>
+                    <a href="mailto:serhii.chechui@gmail.com">serhii.chechui@gmail.com</a>
                 </p>
 
                 <h5>Business Inquiries</h5>

@@ -1,5 +1,7 @@
 // src/pages/TermsOfService.jsx
 import React from "react";
+import "../styles/TermsOfServie.css";
+import { NavLink } from "react-router-dom";
 
 const TermsOfService = () => {
     return (
@@ -25,8 +27,8 @@ const TermsOfService = () => {
 
             <h2>2. Privacy</h2>
             <p>
-                Your privacy is important to us. Please refer to our <a href="/privacy">Privacy Policy</a> for details
-                on how we collect and use your personal data in compliance with the GDPR and COPPA.
+                Your privacy is important to us. Please refer to our <NavLink to="/privacy">Privacy Policy</NavLink> for
+                details on how we collect and use your personal data in compliance with the GDPR and COPPA.
             </p>
 
             <h2>3. User Accounts</h2>
@@ -77,13 +79,13 @@ const TermsOfService = () => {
             <h2>11. Contact</h2>
             <p>
                 If you have questions or concerns, contact us at{" "}
-                <a href="mailto:ghost201087@gmail.com">
-                    <strong>ghost201087@gmail.com</strong>
+                <a href="mailto:serhii.chechui@gmail.com">
+                    <strong>serhii.chechui@gmail.com</strong>
                 </a>
                 .
             </p>
 
-            <p>© 2023–2025 WTFGames. All Rights Reserved.</p>
+            <p>© 2023–2026 WTFGames. All Rights Reserved.</p>
         </div>
     );
 };

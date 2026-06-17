@@ -1,5 +1,6 @@
 // components/Footer.jsx
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
     return (
@@ -9,15 +10,15 @@ const Footer = () => {
                     <small>&copy; {new Date().getFullYear()} WTFGames. All rights reserved.</small>
                 </div>
                 <div className="d-flex gap-3">
-                    <a href="/privacy" className="text-light text-decoration-none">
+                    <NavLink to="/privacy" className="text-light text-decoration-none">
                         Privacy Policy
-                    </a>
-                    <a href="/terms" className="text-light text-decoration-none">
+                    </NavLink>
+                    <NavLink to="/terms" className="text-light text-decoration-none">
                         Terms of Service
-                    </a>
-                    <a href="/contact" className="text-light text-decoration-none">
+                    </NavLink>
+                    <NavLink to="/contact" className="text-light text-decoration-none">
                         Contact
-                    </a>
+                    </NavLink>
                 </div>
             </div>
         </footer>
