@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -7,14 +8,14 @@ const Navigation = () => {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style={{ backgroundColor: "#1E2033" }}>
             <div className="container">
                 {/* Logo */}
-                <a className="navbar-brand" href="/">
+                <Link className="navbar-brand" to="/">
                     <img
-                        src="/wtfgames_logo.svg" // Replace with your logo image
+                        src="/wtfgames_logo.svg"
                         alt="WTFGames"
                         className="d-inline-block align-top"
                         style={{ width: "288px", height: "40px" }}
                     />
-                </a>
+                </Link>
 
                 {/* Mobile Toggle Button */}
                 <button
@@ -36,24 +37,24 @@ const Navigation = () => {
                         {/* Main Menu */}
                         <ul className="navbar-nav me-3 mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <a className="nav-link" href="/about">
+                                <NavLink className="nav-link" to="/about">
                                     About Us
-                                </a>
+                                </NavLink>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/games">
+                                <NavLink className="nav-link" to="/games">
                                     Games
-                                </a>
+                                </NavLink>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/applications">
+                                <NavLink className="nav-link" to="/applications">
                                     Applications
-                                </a>
+                                </NavLink>
                             </li>
                             {/* <li className="nav-item">
-                                <a className="nav-link" href="/careers">
+                                <NavLink className="nav-link" to="/careers">
                                     Careers
-                                </a>
+                                </NavLink>
                             </li> */}
                         </ul>
 
@@ -62,7 +63,7 @@ const Navigation = () => {
                             <li className="nav-item">
                                 <a
                                     className="nav-link"
-                                    href="https://instagram.com"
+                                    href="https://www.instagram.com/wtfgames_community/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -82,7 +83,7 @@ const Navigation = () => {
                             <li className="nav-item">
                                 <a
                                     className="nav-link"
-                                    href="https://twitter.com"
+                                    href="https://x.com/wtfgames14?s=21"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
