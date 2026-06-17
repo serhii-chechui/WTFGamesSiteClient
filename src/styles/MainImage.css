@@ -19,11 +19,31 @@
 }
 
 .main-image__text h1 {
-    font-size: 60px;
+    font-size: 36px;
     margin: 0;
 }
 
 .main-image__text h2 {
-    font-size: 36px;
+    font-size: 20px;
     margin: 0;
+}
+
+@media (min-width: 576px) {
+    .main-image__text h1 {
+        font-size: 48px;
+    }
+
+    .main-image__text h2 {
+        font-size: 28px;
+    }
+}
+
+@media (min-width: 992px) {
+    .main-image__text h1 {
+        font-size: 60px;
+    }
+
+    .main-image__text h2 {
+        font-size: 36px;
+    }
 }
