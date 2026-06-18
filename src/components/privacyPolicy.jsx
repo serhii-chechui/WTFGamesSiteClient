@@ -1,6 +1,5 @@
 // src/pages/PrivacyPolicy.jsx
 import React from "react";
-import { NavLink } from "react-router-dom";
 import "../styles/PirvacyPolicy.css";
 
 const PrivacyPolicy = () => {
