@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchApplications } from "../store/applicatonsSlice";
+import { fetchApplications } from "../store/applicationsSlice";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Games.css";
 import ApplicationCard from "./ApplicationCard";

@@ -1,6 +1,6 @@
 // src/pages/TermsOfService.jsx
 import React from "react";
-import "../styles/TermsOfServie.css";
+import "../styles/TermsOfService.css";
 import { NavLink } from "react-router-dom";
 
 const TermsOfService = () => {
