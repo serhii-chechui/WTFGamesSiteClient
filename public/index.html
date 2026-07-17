@@ -26,13 +26,19 @@
     -->
 
         <!--
+      Canonical URL. Note this is a client-side-rendered SPA with a single
+      static index.html served for every route (see App.js), so this is
+      necessarily one canonical URL for all routes rather than a per-route
+      one. A true per-route canonical would require server-side rendering
+      or prerendering (e.g. react-snap) plus react-helmet-async to vary
+      <head> per page - out of scope here; this is a known, accepted
+      trade-off for a small CSR marketing site.
+    -->
+        <link rel="canonical" href="https://www.wtfgames.com.ua/" />
+
+        <!--
       Open Graph / Twitter Card metadata for link previews (social media,
-      Discord, Slack, etc). og:url and <link rel="canonical"> are
-      intentionally omitted: the production domain isn't recorded anywhere
-      in this repository (no homepage field, no README mention) - add them
-      once a domain is confirmed. og:image below is a relative path for the
-      same reason; most crawlers resolve it fine against this page's URL,
-      but an absolute URL is preferable once the domain is known.
+      Discord, Slack, etc).
     -->
         <meta property="og:title" content="WTFGames" />
         <meta
@@ -40,7 +46,8 @@
             content="WTFGames is an indie game studio building mobile games and desktop applications that entertain, challenge, and inspire."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="%PUBLIC_URL%/logo512.png" />
+        <meta property="og:url" content="https://www.wtfgames.com.ua/" />
+        <meta property="og:image" content="https://www.wtfgames.com.ua/logo512.png" />
 
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="WTFGames" />
@@ -48,7 +55,7 @@
             name="twitter:description"
             content="WTFGames is an indie game studio building mobile games and desktop applications that entertain, challenge, and inspire."
         />
-        <meta name="twitter:image" content="%PUBLIC_URL%/logo512.png" />
+        <meta name="twitter:image" content="https://www.wtfgames.com.ua/logo512.png" />
 
         <title>WTFGames</title>
     </head>
