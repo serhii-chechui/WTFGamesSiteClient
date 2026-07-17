@@ -17,7 +17,11 @@ export const fetchApplications = createAsyncThunk("applications/fetchApplication
         try {
             return { items: applicationsFallback, source: "fallback" };
         } catch (fallbackErr) {
-            return thunkAPI.rejectWithValue(err.message);
+            console.error("fetchApplications: local fallback data also failed to load.", fallbackErr);
+            return thunkAPI.rejectWithValue({
+                status: err.response?.status ?? null,
+                message: err.message,
+            });
         }
     }
 });
