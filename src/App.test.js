@@ -1,9 +1,9 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import axios from "axios";
 import App from "./App";
-import gamesReducer from "./store/gamesSlice";
+import gamesReducer, { fetchGames } from "./store/gamesSlice";
 import applicationsReducer from "./store/applicationsSlice";
 
 // Network calls go through axios inside the Redux thunks (gamesSlice /
@@ -11,24 +11,25 @@ import applicationsReducer from "./store/applicationsSlice";
 // depend on the live wtfgames-api-production.up.railway.app service.
 jest.mock("axios");
 
-// App.js renders its own <Router>, so tests must not wrap it in another
-// router. Instead, navigate by pushing to `window.history` before rendering.
-const renderAtRoute = (route, { withStore = false } = {}) => {
-    window.history.pushState({}, "Test page", route);
-
-    if (!withStore) {
-        return render(<App />);
-    }
-
-    // A fresh store per test avoids state leaking between tests (the real
-    // app store is a long-lived singleton, but here every test needs its
-    // own idle `games`/`applications` slice to reach a predictable state).
-    const store = configureStore({
+// A fresh store per test avoids state leaking between tests (the real app
+// store is a long-lived singleton, but here every test needs its own idle
+// `games`/`applications` slice to reach a predictable state).
+const createTestStore = () =>
+    configureStore({
         reducer: {
             games: gamesReducer,
             applications: applicationsReducer,
         },
     });
+
+// App.js renders its own <Router>, so tests must not wrap it in another
+// router. Instead, navigate by pushing to `window.history` before rendering.
+const renderAtRoute = (route, { store } = {}) => {
+    window.history.pushState({}, "Test page", route);
+
+    if (!store) {
+        return render(<App />);
+    }
 
     return render(
         <Provider store={store}>
@@ -95,9 +96,9 @@ describe("/games route (Redux + API integration, axios mocked)", () => {
             ],
         });
 
-        renderAtRoute("/games", { withStore: true });
+        renderAtRoute("/games", { store: createTestStore() });
 
-        expect(screen.getByText(/загрузка/i)).toBeInTheDocument();
+        expect(screen.getByText(/loading/i)).toBeInTheDocument();
 
         expect(await screen.findByRole("heading", { name: /test game/i })).toBeInTheDocument();
         expect(axios.get).toHaveBeenCalledWith(expect.stringContaining("/api/games"));
@@ -111,13 +112,50 @@ describe("/games route (Redux + API integration, axios mocked)", () => {
     test("falls back to the local games snapshot when the API request fails", async () => {
         axios.get.mockRejectedValueOnce(new Error("Request failed with status code 404"));
 
-        renderAtRoute("/games", { withStore: true });
+        renderAtRoute("/games", { store: createTestStore() });
 
         // gamesSlice catches the API error and resolves with the local
         // src/data/games.json snapshot instead of rejecting, so the page
         // should render the fallback games rather than an error message.
         expect(await screen.findByRole("heading", { name: /spaceglider/i })).toBeInTheDocument();
         expect(screen.getByRole("heading", { name: /virushunt/i })).toBeInTheDocument();
-        expect(screen.queryByText(/ошибка/i)).not.toBeInTheDocument();
+        expect(screen.queryByText(/couldn't load/i)).not.toBeInTheDocument();
+    });
+});
+
+describe("/games error UI and retry (status forced directly, since both the API and the local fallback would have to fail to reach it)", () => {
+    test("shows a friendly message with a Retry button, and Retry re-fetches the games", async () => {
+        const store = createTestStore();
+
+        // Reaching "failed" for real requires both the API and the local
+        // fallback import to fail, which isn't practically mockable here
+        // (see gamesSlice.js). Dispatch the rejected action directly to
+        // exercise the error UI/Retry button contract in isolation.
+        store.dispatch({
+            type: fetchGames.rejected.type,
+            payload: { status: 500, message: "Internal Server Error" },
+        });
+
+        renderAtRoute("/games", { store });
+
+        expect(screen.getByText(/couldn't load our games right now/i)).toBeInTheDocument();
+        // Technical details must not leak into the UI.
+        expect(screen.queryByText(/internal server error/i)).not.toBeInTheDocument();
+
+        axios.get.mockResolvedValueOnce({
+            data: [
+                {
+                    _id: "2",
+                    Title: "Retried Game",
+                    Description: "Loaded after clicking Retry.",
+                    Thumbnail: "/images/test-thumb.png",
+                },
+            ],
+        });
+
+        fireEvent.click(screen.getByRole("button", { name: /retry/i }));
+
+        expect(await screen.findByRole("heading", { name: /retried game/i })).toBeInTheDocument();
+        expect(axios.get).toHaveBeenCalledWith(expect.stringContaining("/api/games"));
     });
 });
