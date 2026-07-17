@@ -40,8 +40,11 @@ coverage/
 # Misc
 *.tgz
 *.log
-*.lock
-package-lock.json
+
+# Lockfiles: package-lock.json is committed on purpose (npm is the only
+# package manager used in this project) to keep installs reproducible.
+# Alternate package managers' lockfiles are ignored to avoid accidental
+# mixing.
 yarn.lock
 pnpm-lock.yaml
 
