@@ -1,15 +1,20 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-import axios from "axios";
 import App from "./App";
+import apiClient from "./api/client";
 import gamesReducer, { fetchGames } from "./store/gamesSlice";
 import applicationsReducer from "./store/applicationsSlice";
 
-// Network calls go through axios inside the Redux thunks (gamesSlice /
-// applicationsSlice). Mock the module so tests are deterministic and never
-// depend on the live wtfgames-api-production.up.railway.app service.
-jest.mock("axios");
+// Both Redux thunks (gamesSlice / applicationsSlice) go through the shared
+// src/api/client.js axios instance. Mock that module (rather than "axios"
+// itself) so tests are deterministic and never depend on the live
+// wtfgames-api-production.up.railway.app service. Mocking our own client
+// also sidesteps having to fake out axios.create()'s return value.
+jest.mock("./api/client", () => ({
+    __esModule: true,
+    default: { get: jest.fn() },
+}));
 
 // A fresh store per test avoids state leaking between tests (the real app
 // store is a long-lived singleton, but here every test needs its own idle
@@ -84,7 +89,7 @@ describe("Routing", () => {
 
 describe("/games route (Redux + API integration, axios mocked)", () => {
     test("shows a loading state and then renders games returned by the API", async () => {
-        axios.get.mockResolvedValueOnce({
+        apiClient.get.mockResolvedValueOnce({
             data: [
                 {
                     _id: "1",
@@ -101,7 +106,7 @@ describe("/games route (Redux + API integration, axios mocked)", () => {
         expect(screen.getByText(/loading/i)).toBeInTheDocument();
 
         expect(await screen.findByRole("heading", { name: /test game/i })).toBeInTheDocument();
-        expect(axios.get).toHaveBeenCalledWith(expect.stringContaining("/api/games"));
+        expect(apiClient.get).toHaveBeenCalledWith("/games", expect.objectContaining({ signal: expect.anything() }));
 
         expect(screen.getByAltText("Download on the App Store")).toHaveAttribute(
             "src",
@@ -110,7 +115,7 @@ describe("/games route (Redux + API integration, axios mocked)", () => {
     });
 
     test("falls back to the local games snapshot when the API request fails", async () => {
-        axios.get.mockRejectedValueOnce(new Error("Request failed with status code 404"));
+        apiClient.get.mockRejectedValueOnce(new Error("Request failed with status code 404"));
 
         renderAtRoute("/games", { store: createTestStore() });
 
@@ -142,7 +147,7 @@ describe("/games error UI and retry (status forced directly, since both the API 
         // Technical details must not leak into the UI.
         expect(screen.queryByText(/internal server error/i)).not.toBeInTheDocument();
 
-        axios.get.mockResolvedValueOnce({
+        apiClient.get.mockResolvedValueOnce({
             data: [
                 {
                     _id: "2",
@@ -156,6 +161,6 @@ describe("/games error UI and retry (status forced directly, since both the API 
         fireEvent.click(screen.getByRole("button", { name: /retry/i }));
 
         expect(await screen.findByRole("heading", { name: /retried game/i })).toBeInTheDocument();
-        expect(axios.get).toHaveBeenCalledWith(expect.stringContaining("/api/games"));
+        expect(apiClient.get).toHaveBeenCalledWith("/games", expect.objectContaining({ signal: expect.anything() }));
     });
 });
