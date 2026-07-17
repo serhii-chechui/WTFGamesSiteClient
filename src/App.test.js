@@ -108,11 +108,16 @@ describe("/games route (Redux + API integration, axios mocked)", () => {
         );
     });
 
-    test("shows an error message when the API request fails", async () => {
+    test("falls back to the local games snapshot when the API request fails", async () => {
         axios.get.mockRejectedValueOnce(new Error("Request failed with status code 404"));
 
         renderAtRoute("/games", { withStore: true });
 
-        expect(await screen.findByText(/ошибка/i)).toBeInTheDocument();
+        // gamesSlice catches the API error and resolves with the local
+        // src/data/games.json snapshot instead of rejecting, so the page
+        // should render the fallback games rather than an error message.
+        expect(await screen.findByRole("heading", { name: /spaceglider/i })).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: /virushunt/i })).toBeInTheDocument();
+        expect(screen.queryByText(/ошибка/i)).not.toBeInTheDocument();
     });
 });
