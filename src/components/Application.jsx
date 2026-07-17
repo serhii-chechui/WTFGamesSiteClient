@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchApplications } from "../store/applicationsSlice";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Games.css";
 import "../styles/GameCard.css";
 import ProductCard from "./ProductCard";
