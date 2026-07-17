@@ -4,10 +4,10 @@
         <meta charset="utf-8" />
         <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#1E2033" />
         <meta
             name="description"
-            content="Web site created using create-react-app"
+            content="WTFGames is an indie game studio building mobile games and desktop applications that entertain, challenge, and inspire."
         />
         <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
         <!--
@@ -24,6 +24,39 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+
+        <!--
+      Canonical URL. Note this is a client-side-rendered SPA with a single
+      static index.html served for every route (see App.js), so this is
+      necessarily one canonical URL for all routes rather than a per-route
+      one. A true per-route canonical would require server-side rendering
+      or prerendering (e.g. react-snap) plus react-helmet-async to vary
+      <head> per page - out of scope here; this is a known, accepted
+      trade-off for a small CSR marketing site.
+    -->
+        <link rel="canonical" href="https://www.wtfgames.com.ua/" />
+
+        <!--
+      Open Graph / Twitter Card metadata for link previews (social media,
+      Discord, Slack, etc).
+    -->
+        <meta property="og:title" content="WTFGames" />
+        <meta
+            property="og:description"
+            content="WTFGames is an indie game studio building mobile games and desktop applications that entertain, challenge, and inspire."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.wtfgames.com.ua/" />
+        <meta property="og:image" content="https://www.wtfgames.com.ua/logo512.png" />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="WTFGames" />
+        <meta
+            name="twitter:description"
+            content="WTFGames is an indie game studio building mobile games and desktop applications that entertain, challenge, and inspire."
+        />
+        <meta name="twitter:image" content="https://www.wtfgames.com.ua/logo512.png" />
+
         <title>WTFGames</title>
     </head>
     <body>

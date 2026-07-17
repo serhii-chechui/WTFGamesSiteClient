@@ -1,8 +1,11 @@
-// src/pages/Contact.jsx
+// src/components/Contacts.jsx
 import React from "react";
 import "../styles/Contacts.css";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
-const Contact = () => {
+const Contacts = () => {
+    useDocumentTitle("Contact — WTFGames");
+
     return (
         <div id="contacts" className="container py-5">
             <h1>Contact Us</h1>
@@ -49,4 +52,4 @@ const Contact = () => {
     );
 };
 
-export default Contact;
+export default Contacts;

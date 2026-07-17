@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const Navigation = () => {
@@ -13,7 +12,7 @@ const Navigation = () => {
                         src="/wtfgames_logo.svg"
                         alt="WTFGames"
                         className="d-inline-block align-top"
-                        style={{ width: "288px", height: "40px" }}
+                        style={{ height: "40px", width: "auto", maxWidth: "clamp(160px, 70vw, 288px)" }}
                     />
                 </Link>
 

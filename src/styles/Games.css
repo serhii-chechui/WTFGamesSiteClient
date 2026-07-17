@@ -1,5 +1,8 @@
+/* No !important needed here: the #games div carries no className (unlike
+   the container/py-5 pages in index.css), so nothing else competes for
+   its padding. */
 #games {
-    padding: 66px 0 !important;
+    padding: var(--navbar-height) 0;
     background:
         url("/public/images/wtfgames_site_games_bg.png"),
         linear-gradient(to right, rgb(208, 54, 77) 0%, rgb(36, 98, 179) 100%);
@@ -9,17 +12,6 @@
 
 #games h1 {
     margin: 2rem 0;
-}
-
-@media only screen and (max-width: 575px) {
-    #games {
-        padding: 66px 0 !important;
-        background:
-            url("/public/images/wtfgames_site_games_bg.png"),
-            linear-gradient(to right, rgb(208, 54, 77) 0%, rgb(36, 98, 179) 100%);
-        background-repeat: repeat, no-repeat;
-        background-size: auto, cover;
-    }
 }
 
 @media only screen and (min-width: 576px) {

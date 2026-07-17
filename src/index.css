@@ -1,3 +1,17 @@
+:root {
+    /* Height of the fixed navbar (Navigation component). Kept in one place
+       so every page that needs to clear it stays in sync if the navbar's
+       height ever changes. */
+    --navbar-height: 66px;
+
+    /* Top padding used by static content pages (About, Contact, Privacy,
+       Terms, 404, the error fallback) to clear the fixed navbar with extra
+       breathing room above their heading. This is a distinct design value,
+       not simply --navbar-height plus a fixed gap, so it gets its own name
+       rather than a derived calc() - still just one place to change it. */
+    --page-top-offset: 128px;
+}
+
 html,
 body,
 #root {
@@ -22,16 +36,34 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+/* !important is required on all six rules below: each of these pages'
+   root div also carries Bootstrap's `.py-5` utility class, and Bootstrap's
+   own compiled CSS declares `.py-5 { padding-top: 3rem !important; ... }`.
+   A non-important declaration here would lose to that utility class
+   regardless of specificity, and the content would end up hidden under
+   the fixed navbar. */
 #privacy-policy {
-    padding-top: 128px !important;
+    padding-top: var(--page-top-offset) !important;
 }
 
 #terms-of-service {
-    padding-top: 128px !important;
+    padding-top: var(--page-top-offset) !important;
 }
 
 #contacts {
-    padding-top: 128px !important;
+    padding-top: var(--page-top-offset) !important;
+}
+
+#about {
+    padding-top: var(--page-top-offset) !important;
+}
+
+#not-found {
+    padding-top: var(--page-top-offset) !important;
+}
+
+#error-boundary {
+    padding-top: var(--page-top-offset) !important;
 }
 
 #footer {

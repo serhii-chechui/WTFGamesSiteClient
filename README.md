@@ -1,45 +1,94 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+# WTFGames Site
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
+Official website of WTFGames — an indie game studio. Built with React (Create React App), React Router, Redux Toolkit, and Bootstrap.
 
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
+## Getting Started
 
----
+```bash
+npm install
+npm start        # dev server at http://localhost:3000
+npm run build    # production build into ./build
+```
 
-## Edit a file
+## Configuration
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
+The games/applications API base URL is read from the `REACT_APP_API_URL`
+environment variable (see `src/api/client.js`). Copy `.env.example` to `.env`
+(gitignored, not committed) to override it, e.g. to point at a local or
+staging backend:
 
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
+```bash
+cp .env.example .env
+```
 
----
+If `.env` is absent or the variable isn't set, the app falls back to the
+current production API, so `npm start` / `npm run build` work out of the box
+without any local configuration.
 
-## Create a file
+## Static policy pages
 
-Next, you’ll add a new file to this repository.
+Store-facing policy pages live in `public/` and are served as plain HTML at the site root:
 
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
+- `/ludorama-privacy-policy.html`
+- `/lumascope-privacy-policy.html`
 
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
+## Git Flow
 
----
+This repository follows the [git flow](https://nvie.com/posts/a-successful-git-branching-model/) branching model.
 
-## Clone a repository
+### Branches
 
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
+| Branch | Purpose |
+| --- | --- |
+| `main` | Production. Every commit here is a release. |
+| `develop` | Integration branch. All day-to-day work lands here. |
+| `feature/*` | New features, branched from `develop`, merged back to `develop`. |
+| `release/*` | Release preparation, branched from `develop`, merged to `main` and `develop`. |
+| `hotfix/*` | Urgent production fixes, branched from `main`, merged to `main` and `develop`. |
 
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
+### Remotes
 
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+The project lives in two repositories that must be kept in sync:
+
+| Remote | Host |
+| --- | --- |
+| `origin` | Bitbucket (`wtf_games/wtfgamessiteclient`) |
+| `github.com` | GitHub (`serhii-chechui/WTFGamesSiteClient`) |
+
+`origin` is configured with two push URLs, so a regular `git push origin <branch>` delivers to **both** Bitbucket and GitHub at once (fetch still comes from Bitbucket only). To restore this setup on a fresh clone:
+
+```bash
+git remote set-url --add --push origin git@bitbucket.org:wtf_games/wtfgamessiteclient.git
+git remote set-url --add --push origin git@github.com-serhii-chechui:serhii-chechui/WTFGamesSiteClient.git
+```
+
+### Daily workflow
+
+The [git-flow CLI](https://github.com/nvie/gitflow) is configured for this repo (`main`/`develop`, `v` tag prefix):
+
+```bash
+# feature
+git flow feature start my-feature
+# ...commit work...
+git flow feature finish my-feature   # merges into develop
+git push origin develop              # goes to Bitbucket + GitHub
+
+# release
+git flow release start 1.1.0
+# ...bump version, final fixes...
+git flow release finish 1.1.0        # merges into main + develop, tags v1.1.0
+git push origin main develop --tags  # goes to Bitbucket + GitHub
+
+# hotfix
+git flow hotfix start 1.1.1
+# ...fix...
+git flow hotfix finish 1.1.1         # merges into main + develop, tags v1.1.1
+git push origin main develop --tags  # goes to Bitbucket + GitHub
+```
+
+Without the CLI, the same flow works with plain `git branch` / `git merge --no-ff` following the table above.
+
+### Rules
+
+- Do not commit directly to `main`; it only receives merges from `release/*` and `hotfix/*`.
+- Deploy is done from `main`.

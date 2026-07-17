@@ -1,6 +1,10 @@
 import React from "react";
+import "../styles/AboutUs.css";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const AboutUs = () => {
+    useDocumentTitle("About Us — WTFGames");
+
     return (
         <div id="about" className="container py-5">
             <h1>About Us</h1>
@@ -12,21 +16,18 @@ const AboutUs = () => {
             <div className="mt-4">
                 <h5>Who We Are</h5>
                 <p>
-                    {/* TODO: добавить описание команды */}
                     We are a small but dedicated team of developers, artists, and designers
                     united by a love of games and a desire to push creative boundaries.
                 </p>
 
                 <h5>What We Make</h5>
                 <p>
-                    {/* TODO: описание жанров/платформ */}
                     From mobile games to desktop applications, we build products that
                     entertain, challenge, and inspire.
                 </p>
 
                 <h5>Our Mission</h5>
                 <p>
-                    {/* TODO: миссия студии */}
                     To craft experiences that make players say "WTF" — in the best possible way.
                 </p>
             </div>
