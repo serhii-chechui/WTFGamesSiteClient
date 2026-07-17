@@ -9,14 +9,14 @@ const PrivacyPolicy = () => {
     return (
         <div id="privacy-policy" className="container py-5">
             <h1>Privacy Policy</h1>
-            <strong>Privacy Policy</strong>
+            <h2>Privacy Policy</h2>
             <p>
                 This privacy policy applies to the Spaceglider app for mobile devices, together with any related
                 services operated by WatchTheFrameGames (collectively, the "Application"). WatchTheFrameGames is hereby
                 referred to as the "Service Provider".
             </p>
             <br />
-            <strong>Information Collection and Use</strong>
+            <h2>Information Collection and Use</h2>
             <p>
                 The Application collects information when you download and use it. This information may include
                 information such as{" "}
@@ -32,21 +32,21 @@ const PrivacyPolicy = () => {
             </ul>
             <p></p>
             <br />
-            <strong>Cookies and tracking technologies</strong>
+            <h2>Cookies and tracking technologies</h2>
             <p>
                 The Application or its third-party SDKs may use cookies, SDKs, pixels, and similar technologies to
                 support functionality, analytics, or service delivery. Where required by applicable law, the Service
                 Provider will obtain consent before using non-essential tracking technologies.
             </p>
             <br />
-            <strong>Your Rights</strong>
+            <h2>Your Rights</h2>
             <p>
                 You may request access to, correction of, or deletion of your personal data held by the Service
                 Provider. To exercise these rights, or to withdraw consent where processing is based on consent, contact
                 the Service Provider at serhii.chechui@gmail.com.
             </p>
             <br />
-            <strong>Your California privacy rights (CCPA/CPRA)</strong>
+            <h2>Your California privacy rights (CCPA/CPRA)</h2>
             <p>
                 If you are a California resident, you have the right to know what personal information is collected, the
                 right to delete personal information, the right to opt out of the sale or sharing of personal
@@ -64,14 +64,14 @@ const PrivacyPolicy = () => {
                 information the Service Provider requests will be retained and used as described in this privacy policy.
             </p>
             <br />
-            <strong>Third Party Access</strong>
+            <h2>Third Party Access</h2>
             <p>
                 Only aggregated, anonymized data is periodically transmitted to external services to aid the Service
                 Provider in improving the Application and their service. The Service Provider may share your information
                 with third parties in the ways that are described in this privacy statement.
             </p>
             <br />
-            <strong>International Data Transfers</strong>
+            <h2>International Data Transfers</h2>
             <p>
                 The Service Provider or its third-party service providers may transfer personal data to countries
                 outside your country of residence, including outside the European Economic Area (EEA). Where applicable
@@ -117,7 +117,7 @@ const PrivacyPolicy = () => {
             </ul>
             <p></p>
             <br />
-            <strong>Opt-Out Rights</strong>
+            <h2>Opt-Out Rights</h2>
             <div>
                 <p>
                     You can stop further collection of information from your mobile device by uninstalling the
@@ -131,7 +131,7 @@ const PrivacyPolicy = () => {
                 contact the Service Provider at serhii.chechui@gmail.com.
             </p>
             <br />
-            <strong>Data Retention Policy</strong>
+            <h2>Data Retention Policy</h2>
             <p>The Service Provider retains personal data based on its necessity for the stated purposes:</p>
             <ul>
                 <li>
@@ -152,7 +152,7 @@ const PrivacyPolicy = () => {
                 Application to function properly.
             </p>
             <br />
-            <strong>Children</strong>
+            <h2>Children</h2>
             <p>
                 The Application is not intended for children under 16 years of age, or such higher age as required by
                 applicable law. The Service Provider does not knowingly solicit data from children or market the
@@ -172,21 +172,21 @@ const PrivacyPolicy = () => {
                 </p>
             </div>
             <br />
-            <strong>Security</strong>
+            <h2>Security</h2>
             <p>
                 The Service Provider is concerned about safeguarding the confidentiality of your information. The
                 Service Provider provides physical, electronic, and procedural safeguards to protect information the
                 Service Provider processes and maintains.
             </p>
             <br />
-            <strong>Data Breach Notification</strong>
+            <h2>Data Breach Notification</h2>
             <p>
                 If a data breach occurs that affects your personal data, the Service Provider will notify you in
                 accordance with applicable legal requirements, including, where required, providing information about
                 the nature of the breach and the steps being taken to address it.
             </p>
             <br />
-            <strong>Changes</strong>
+            <h2>Changes</h2>
             <p>
                 The Service Provider may update this Privacy Policy from time to time. The Service Provider will notify
                 you of material changes by posting the updated Privacy Policy with an effective date. Where required by
@@ -200,14 +200,14 @@ const PrivacyPolicy = () => {
             <br />
             <p>This privacy policy is effective as of 2026-06-18</p>
             <br />
-            <strong>Your Consent</strong>
+            <h2>Your Consent</h2>
             <p>
                 Where processing is based on consent, you provide that consent by affirmatively opting in to the
                 relevant feature or action. You may withdraw consent at any time without affecting processing carried
                 out before withdrawal. Processing based on other lawful bases is carried out as described above.
             </p>
             <br />
-            <strong>Contact Us</strong>
+            <h2>Contact Us</h2>
             <p>
                 If you have any questions regarding privacy while using the Application, or have questions about the
                 practices, please contact the Service Provider via email at serhii.chechui@gmail.com.

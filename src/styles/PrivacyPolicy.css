@@ -1,3 +1,14 @@
 #privacy-policy {
     background-color: white;
 }
+
+/* Section headings were previously plain <strong> text (bold, body-text
+   size, no block margin). Now real <h2> elements for a11y/heading
+   hierarchy, but kept visually close to the original scale instead of
+   Bootstrap's much larger default h2 styling, so the page doesn't look
+   visually "bloated" compared to before. */
+#privacy-policy h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
