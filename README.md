@@ -33,12 +33,19 @@ This repository follows the [git flow](https://nvie.com/posts/a-successful-git-b
 
 ### Remotes
 
-The project lives in two repositories that must be kept in sync — push every branch update to both:
+The project lives in two repositories that must be kept in sync:
 
 | Remote | Host |
 | --- | --- |
 | `origin` | Bitbucket (`wtf_games/wtfgamessiteclient`) |
 | `github.com` | GitHub (`serhii-chechui/WTFGamesSiteClient`) |
+
+`origin` is configured with two push URLs, so a regular `git push origin <branch>` delivers to **both** Bitbucket and GitHub at once (fetch still comes from Bitbucket only). To restore this setup on a fresh clone:
+
+```bash
+git remote set-url --add --push origin git@bitbucket.org:wtf_games/wtfgamessiteclient.git
+git remote set-url --add --push origin git@github.com-serhii-chechui:serhii-chechui/WTFGamesSiteClient.git
+```
 
 ### Daily workflow
 
@@ -49,19 +56,19 @@ The [git-flow CLI](https://github.com/nvie/gitflow) is configured for this repo 
 git flow feature start my-feature
 # ...commit work...
 git flow feature finish my-feature   # merges into develop
-git push origin develop && git push github.com develop
+git push origin develop              # goes to Bitbucket + GitHub
 
 # release
 git flow release start 1.1.0
 # ...bump version, final fixes...
 git flow release finish 1.1.0        # merges into main + develop, tags v1.1.0
-git push origin main develop --tags && git push github.com main develop --tags
+git push origin main develop --tags  # goes to Bitbucket + GitHub
 
 # hotfix
 git flow hotfix start 1.1.1
 # ...fix...
 git flow hotfix finish 1.1.1         # merges into main + develop, tags v1.1.1
-git push origin main develop --tags && git push github.com main develop --tags
+git push origin main develop --tags  # goes to Bitbucket + GitHub
 ```
 
 Without the CLI, the same flow works with plain `git branch` / `git merge --no-ff` following the table above.
