@@ -1,0 +1,24 @@
+[
+    {
+        "_id": "68881e991f8f7be739ac025e",
+        "Title": "SpaceGlider",
+        "Description": "An interstellar runner game full of cosmic adventure.",
+        "Thumbnail": "https://s3.eu-central-1.amazonaws.com/com.wtfgames.site/games/1754553453307-9ea31d85-8a9f-4b0d-97d1-3936d3ae314a.png",
+        "AppStoreUrl": "https://apps.apple.com/ua/app/space-glider-2d/id1500827596",
+        "GooglePlayUrl": "https://play.google.com/store/apps/details?id=com.wtfgames.spaceglider",
+        "SteamUrl": "",
+        "ItchIOUrl": "",
+        "CommingSoon": false
+    },
+    {
+        "_id": "6888385d1f8f7be739ac0275",
+        "Title": "VirusHunt",
+        "Description": "Catch them all! Tap the falling cute viruses in this fun, fast-paced arcade game made especially for kids. Easy to play, hard to put down!",
+        "Thumbnail": "https://s3.eu-central-1.amazonaws.com/com.wtfgames.site/games/1754523960349-181b9ef1-5bbf-4a40-8326-7e6551e72f0e.png",
+        "AppStoreUrl": "https://apps.apple.com/ua/app/virus-hunt/id1456015343",
+        "GooglePlayUrl": "",
+        "SteamUrl": "",
+        "ItchIOUrl": "",
+        "CommingSoon": true
+    }
+]
