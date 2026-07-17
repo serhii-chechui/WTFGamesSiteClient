@@ -90,6 +90,7 @@ describe("/games route (Redux + API integration, axios mocked)", () => {
                     Title: "Test Game",
                     Description: "A game used in tests.",
                     Thumbnail: "/images/test-thumb.png",
+                    AppStoreUrl: "https://apps.apple.com/app/test-game",
                 },
             ],
         });
@@ -100,6 +101,11 @@ describe("/games route (Redux + API integration, axios mocked)", () => {
 
         expect(await screen.findByRole("heading", { name: /test game/i })).toBeInTheDocument();
         expect(axios.get).toHaveBeenCalledWith(expect.stringContaining("/api/games"));
+
+        expect(screen.getByAltText("Download on the App Store")).toHaveAttribute(
+            "src",
+            "/images/App_Store_Badge_US-UK_RGB_blk_092917.svg",
+        );
     });
 
     test("shows an error message when the API request fails", async () => {
