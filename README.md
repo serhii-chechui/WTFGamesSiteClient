@@ -31,6 +31,15 @@ This repository follows the [git flow](https://nvie.com/posts/a-successful-git-b
 | `release/*` | Release preparation, branched from `develop`, merged to `main` and `develop`. |
 | `hotfix/*` | Urgent production fixes, branched from `main`, merged to `main` and `develop`. |
 
+### Remotes
+
+The project lives in two repositories that must be kept in sync — push every branch update to both:
+
+| Remote | Host |
+| --- | --- |
+| `origin` | Bitbucket (`wtf_games/wtfgamessiteclient`) |
+| `github.com` | GitHub (`serhii-chechui/WTFGamesSiteClient`) |
+
 ### Daily workflow
 
 The [git-flow CLI](https://github.com/nvie/gitflow) is configured for this repo (`main`/`develop`, `v` tag prefix):
@@ -40,19 +49,19 @@ The [git-flow CLI](https://github.com/nvie/gitflow) is configured for this repo 
 git flow feature start my-feature
 # ...commit work...
 git flow feature finish my-feature   # merges into develop
-git push origin develop
+git push origin develop && git push github.com develop
 
 # release
 git flow release start 1.1.0
 # ...bump version, final fixes...
 git flow release finish 1.1.0        # merges into main + develop, tags v1.1.0
-git push origin main develop --tags
+git push origin main develop --tags && git push github.com main develop --tags
 
 # hotfix
 git flow hotfix start 1.1.1
 # ...fix...
 git flow hotfix finish 1.1.1         # merges into main + develop, tags v1.1.1
-git push origin main develop --tags
+git push origin main develop --tags && git push github.com main develop --tags
 ```
 
 Without the CLI, the same flow works with plain `git branch` / `git merge --no-ff` following the table above.
