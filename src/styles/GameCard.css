@@ -82,7 +82,15 @@
 
 .store-buttons {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 12px;
+}
+
+@media (min-width: 768px) {
+    .store-buttons {
+        justify-content: flex-start;
+    }
 }
 
 .store-buttons:hover {

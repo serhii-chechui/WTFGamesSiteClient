@@ -13,7 +13,7 @@ const Navigation = () => {
                         src="/wtfgames_logo.svg"
                         alt="WTFGames"
                         className="d-inline-block align-top"
-                        style={{ width: "288px", height: "40px" }}
+                        style={{ height: "40px", width: "auto", maxWidth: "clamp(160px, 70vw, 288px)" }}
                     />
                 </Link>
 
