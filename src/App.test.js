@@ -57,10 +57,11 @@ describe("Navigation and layout", () => {
         expect(screen.getByRole("link", { name: "Applications" })).toHaveAttribute("href", "/applications");
     });
 
-    test("renders the hero heading on the home page", () => {
+    test("renders the hero heading on the home page and sets the document title", () => {
         renderAtRoute("/");
 
         expect(screen.getByRole("heading", { level: 1, name: /watch the frame/i })).toBeInTheDocument();
+        expect(document.title).toBe("WTFGames");
     });
 
     test("renders the footer with privacy, terms and contact links", () => {
@@ -73,17 +74,19 @@ describe("Navigation and layout", () => {
 });
 
 describe("Routing", () => {
-    test("renders the About Us page at /about", () => {
+    test("renders the About Us page at /about and sets the document title", () => {
         renderAtRoute("/about");
 
         expect(screen.getByRole("heading", { level: 1, name: /about us/i })).toBeInTheDocument();
+        expect(document.title).toBe("About Us — WTFGames");
     });
 
-    test("renders a 404 page for an unknown route", () => {
+    test("renders a 404 page for an unknown route and sets the document title", () => {
         renderAtRoute("/this-route-does-not-exist");
 
         expect(screen.getByRole("heading", { name: /404/i })).toBeInTheDocument();
         expect(screen.getByRole("link", { name: /back to home/i })).toHaveAttribute("href", "/");
+        expect(document.title).toBe("404 — WTFGames");
     });
 });
 
@@ -104,6 +107,7 @@ describe("/games route (Redux + API integration, axios mocked)", () => {
         renderAtRoute("/games", { store: createTestStore() });
 
         expect(screen.getByText(/loading/i)).toBeInTheDocument();
+        expect(document.title).toBe("Games — WTFGames");
 
         expect(await screen.findByRole("heading", { name: /test game/i })).toBeInTheDocument();
         expect(apiClient.get).toHaveBeenCalledWith("/games", expect.objectContaining({ signal: expect.anything() }));

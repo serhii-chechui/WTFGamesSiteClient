@@ -1,7 +1,10 @@
 import React from "react";
 import "../styles/AboutUs.css";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const AboutUs = () => {
+    useDocumentTitle("About Us — WTFGames");
+
     return (
         <div id="about" className="container py-5">
             <h1>About Us</h1>

@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/NotFound.css";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const NotFound = () => {
+    useDocumentTitle("404 — WTFGames");
+
     return (
         <div id="not-found" className="container py-5">
             <h1>404 — Page Not Found</h1>

@@ -2,8 +2,11 @@
 import React from "react";
 import "../styles/TermsOfService.css";
 import { NavLink } from "react-router-dom";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const TermsOfService = () => {
+    useDocumentTitle("Terms of Service — WTFGames");
+
     return (
         <div id="terms-of-service" className="container py-5">
             <h1>Terms of Service</h1>
