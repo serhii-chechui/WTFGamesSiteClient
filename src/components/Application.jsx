@@ -4,7 +4,7 @@ import { fetchApplications } from "../store/applicationsSlice";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Games.css";
 import "../styles/GameCard.css";
-import ApplicationCard from "./ApplicationCard";
+import ProductCard from "./ProductCard";
 
 const Applications = () => {
     const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const Applications = () => {
             <div className="container">
                 <h1 className="white-text">Our Applications</h1>
                 {items.map((application) => (
-                    <ApplicationCard key={application._id} application={application} />
+                    <ProductCard key={application._id} product={application} />
                 ))}
             </div>
         </div>
