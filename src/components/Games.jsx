@@ -4,7 +4,7 @@ import { fetchGames } from "../store/gamesSlice";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Games.css";
 import "../styles/GameCard.css";
-import GameCard from "./GameCard";
+import ProductCard from "./ProductCard";
 
 const Games = () => {
     const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const Games = () => {
             <div className="container">
                 <h1 className="white-text">Our Games</h1>
                 {items.map((game) => (
-                    <GameCard key={game._id} game={game} />
+                    <ProductCard key={game._id} product={game} />
                 ))}
             </div>
         </div>

@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import apiClient from "../api/client";
 import gamesFallback from "../data/games.json";
 
 // Async action — загрузка игр с API
 export const fetchGames = createAsyncThunk("games/fetchGames", async (_, thunkAPI) => {
     try {
-        const response = await axios.get("https://wtfgames-api-production.up.railway.app/api/games");
+        const response = await apiClient.get("/games", { signal: thunkAPI.signal });
         return { items: response.data, source: "api" };
     } catch (err) {
         // The API has been unreliable (see wtfgames-site audit, Critical #1).

@@ -10,6 +10,21 @@ npm start        # dev server at http://localhost:3000
 npm run build    # production build into ./build
 ```
 
+## Configuration
+
+The games/applications API base URL is read from the `REACT_APP_API_URL`
+environment variable (see `src/api/client.js`). Copy `.env.example` to `.env`
+(gitignored, not committed) to override it, e.g. to point at a local or
+staging backend:
+
+```bash
+cp .env.example .env
+```
+
+If `.env` is absent or the variable isn't set, the app falls back to the
+current production API, so `npm start` / `npm run build` work out of the box
+without any local configuration.
+
 ## Static policy pages
 
 Store-facing policy pages live in `public/` and are served as plain HTML at the site root:
