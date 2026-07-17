@@ -64,6 +64,14 @@ describe("Navigation and layout", () => {
         expect(document.title).toBe("WTFGames");
     });
 
+    test("wraps routed page content in a <main> landmark", () => {
+        renderAtRoute("/");
+
+        const main = screen.getByRole("main");
+        expect(main).toBeInTheDocument();
+        expect(main).toContainElement(screen.getByRole("heading", { level: 1, name: /watch the frame/i }));
+    });
+
     test("renders the footer with privacy, terms and contact links", () => {
         renderAtRoute("/");
 
@@ -87,6 +95,16 @@ describe("Routing", () => {
         expect(screen.getByRole("heading", { name: /404/i })).toBeInTheDocument();
         expect(screen.getByRole("link", { name: /back to home/i })).toHaveAttribute("href", "/");
         expect(document.title).toBe("404 — WTFGames");
+    });
+
+    test("renders the Privacy Policy page with a proper heading hierarchy", () => {
+        renderAtRoute("/privacy");
+
+        expect(screen.getByRole("heading", { level: 1, name: /^privacy policy$/i })).toBeInTheDocument();
+        // Section "headings" used to be plain <strong> text; they're now
+        // real <h2>s so the page has an actual navigable heading structure.
+        expect(screen.getByRole("heading", { level: 2, name: /information collection and use/i })).toBeInTheDocument();
+        expect(screen.getByRole("heading", { level: 2, name: /^contact us$/i })).toBeInTheDocument();
     });
 });
 
