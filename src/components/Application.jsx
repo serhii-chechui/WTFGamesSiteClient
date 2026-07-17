@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchApplications } from "../store/applicationsSlice";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Games.css";
+import "../styles/GameCard.css";
 import ApplicationCard from "./ApplicationCard";
 
 const Applications = () => {
-    // ← было Games
     const dispatch = useDispatch();
-    const { items, status, error } = useSelector((state) => state.applications);
+    const { items, status } = useSelector((state) => state.applications);
 
     useEffect(() => {
+        // Only fetch if we haven't already
         if (status === "idle") {
             dispatch(fetchApplications());
         }
@@ -20,7 +21,7 @@ const Applications = () => {
         return (
             <div id="games">
                 <div className="container">
-                    <p className="white-text">Загрузка...</p>
+                    <p className="white-text">Loading...</p>
                 </div>
             </div>
         );
@@ -30,7 +31,10 @@ const Applications = () => {
         return (
             <div id="games">
                 <div className="container">
-                    <p className="white-text">Ошибка: {error}</p>
+                    <p className="white-text">Couldn't load our applications right now. Please try again.</p>
+                    <button type="button" className="play-button" onClick={() => dispatch(fetchApplications())}>
+                        Retry
+                    </button>
                 </div>
             </div>
         );
@@ -41,7 +45,7 @@ const Applications = () => {
             <div className="container">
                 <h1 className="white-text">Our Applications</h1>
                 {items.map((application) => (
-                    <ApplicationCard key={application._id} application={application} /> // ← было GameCard + game
+                    <ApplicationCard key={application._id} application={application} />
                 ))}
             </div>
         </div>
