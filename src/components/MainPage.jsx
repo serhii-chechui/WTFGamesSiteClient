@@ -1,7 +1,10 @@
 import React from "react";
 import "../styles/MainImage.css";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const MainPage = () => {
+    useDocumentTitle("WTFGames");
+
     return (
         <div id="main-page">
             <div className="main-image__text">

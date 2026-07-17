@@ -4,8 +4,11 @@ import { fetchApplications } from "../store/applicationsSlice";
 import "../styles/Games.css";
 import "../styles/GameCard.css";
 import ProductCard from "./ProductCard";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const Applications = () => {
+    useDocumentTitle("Applications — WTFGames");
+
     const dispatch = useDispatch();
     const { items, status } = useSelector((state) => state.applications);
 

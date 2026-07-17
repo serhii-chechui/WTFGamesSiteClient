@@ -1,8 +1,11 @@
 // src/pages/PrivacyPolicy.jsx
 import React from "react";
 import "../styles/PrivacyPolicy.css";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const PrivacyPolicy = () => {
+    useDocumentTitle("Privacy Policy — WTFGames");
+
     return (
         <div id="privacy-policy" className="container py-5">
             <h1>Privacy Policy</h1>

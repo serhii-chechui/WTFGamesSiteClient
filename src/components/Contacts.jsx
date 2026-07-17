@@ -1,8 +1,11 @@
 // src/pages/Contact.jsx
 import React from "react";
 import "../styles/Contacts.css";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const Contact = () => {
+    useDocumentTitle("Contact — WTFGames");
+
     return (
         <div id="contacts" className="container py-5">
             <h1>Contact Us</h1>
