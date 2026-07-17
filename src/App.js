@@ -9,6 +9,7 @@ import Footer from "./components/footer";
 import PrivacyPolicy from "./components/privacyPolicy";
 import TermOFService from "./components/termsOfService";
 import Contacts from "./components/Contacts";
+import AboutUs from "./components/AboutUs";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Navigation />
                 <Routes>
                     <Route path="/" element={<MainPage />} />
+                    <Route path="/about" element={<AboutUs />} />
                     <Route path="/games" element={<Games />} />
                     <Route path="/applications" element={<Application />} />
                     <Route path="/privacy" element={<PrivacyPolicy />} />
