@@ -38,6 +38,10 @@ code {
     padding-top: 128px !important;
 }
 
+#not-found {
+    padding-top: 128px !important;
+}
+
 #footer {
     position: relative;
     bottom: 0;

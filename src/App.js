@@ -10,6 +10,7 @@ import PrivacyPolicy from "./components/privacyPolicy";
 import TermOFService from "./components/termsOfService";
 import Contacts from "./components/Contacts";
 import AboutUs from "./components/AboutUs";
+import NotFound from "./components/NotFound";
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                     <Route path="/privacy" element={<PrivacyPolicy />} />
                     <Route path="/terms" element={<TermOFService />} />
                     <Route path="/contact" element={<Contacts />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
                 <Footer />
             </React.Fragment>
