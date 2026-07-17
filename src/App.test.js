@@ -66,6 +66,21 @@ describe("Navigation and layout", () => {
     });
 });
 
+describe("Routing", () => {
+    test("renders the About Us page at /about", () => {
+        renderAtRoute("/about");
+
+        expect(screen.getByRole("heading", { level: 1, name: /about us/i })).toBeInTheDocument();
+    });
+
+    test("renders a 404 page for an unknown route", () => {
+        renderAtRoute("/this-route-does-not-exist");
+
+        expect(screen.getByRole("heading", { name: /404/i })).toBeInTheDocument();
+        expect(screen.getByRole("link", { name: /back to home/i })).toHaveAttribute("href", "/");
+    });
+});
+
 describe("/games route (Redux + API integration, axios mocked)", () => {
     test("shows a loading state and then renders games returned by the API", async () => {
         axios.get.mockResolvedValueOnce({
