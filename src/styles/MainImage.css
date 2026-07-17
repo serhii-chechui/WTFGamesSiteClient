@@ -4,8 +4,8 @@
     background-position: center;
     background-size: cover;
     width: 100%;
-    height: calc(100vh - 24px * 3 - 66px);
-    margin-top: 66px;
+    height: calc(100vh - 24px * 3 - var(--navbar-height));
+    margin-top: var(--navbar-height);
     display: flex;
 }
 
