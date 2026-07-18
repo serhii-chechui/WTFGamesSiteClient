@@ -9,8 +9,8 @@ import applicationsReducer from "./store/applicationsSlice";
 // Both Redux thunks (gamesSlice / applicationsSlice) go through the shared
 // src/api/client.js axios instance. Mock that module (rather than "axios"
 // itself) so tests are deterministic and never depend on the live
-// wtfgames-api-production.up.railway.app service. Mocking our own client
-// also sidesteps having to fake out axios.create()'s return value.
+// api.wtfgames.com.ua service. Mocking our own client also sidesteps
+// having to fake out axios.create()'s return value.
 jest.mock("./api/client", () => ({
     __esModule: true,
     default: { get: jest.fn() },
