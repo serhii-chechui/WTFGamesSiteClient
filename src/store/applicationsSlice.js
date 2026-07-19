@@ -6,8 +6,17 @@ import applicationsFallback from "../data/applications.json";
 export const fetchApplications = createAsyncThunk("applications/fetchApplications", async (_, thunkAPI) => {
     try {
         const response = await apiClient.get("/applications", { signal: thunkAPI.signal });
-        // API responses use the envelope { success, data }; applications are in data.
-        return { items: response.data.data, source: "api" };
+        // Tolerate both API response shapes during the backend migration
+        // window: the new envelope { success, data } and the old bare
+        // array. Anything else (including a malformed envelope with no
+        // `data` array) is treated as an error and falls through to the
+        // catch block below, where the local fallback data kicks in.
+        const payload = response.data;
+        const items = Array.isArray(payload) ? payload : payload?.data;
+        if (!Array.isArray(items)) {
+            throw new Error("Unexpected API response shape");
+        }
+        return { items, source: "api" };
     } catch (err) {
         // The API has been unreliable (see wtfgames-site audit, Critical #1).
         // Fall back to a local snapshot of the applications collection so
