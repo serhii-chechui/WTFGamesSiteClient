@@ -6,7 +6,8 @@ import gamesFallback from "../data/games.json";
 export const fetchGames = createAsyncThunk("games/fetchGames", async (_, thunkAPI) => {
     try {
         const response = await apiClient.get("/games", { signal: thunkAPI.signal });
-        return { items: response.data, source: "api" };
+        // API responses use the envelope { success, data }; games are in data.
+        return { items: response.data.data, source: "api" };
     } catch (err) {
         // The API has been unreliable (see wtfgames-site audit, Critical #1).
         // Fall back to a local snapshot of the games collection so the page

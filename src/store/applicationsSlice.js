@@ -6,7 +6,8 @@ import applicationsFallback from "../data/applications.json";
 export const fetchApplications = createAsyncThunk("applications/fetchApplications", async (_, thunkAPI) => {
     try {
         const response = await apiClient.get("/applications", { signal: thunkAPI.signal });
-        return { items: response.data, source: "api" };
+        // API responses use the envelope { success, data }; applications are in data.
+        return { items: response.data.data, source: "api" };
     } catch (err) {
         // The API has been unreliable (see wtfgames-site audit, Critical #1).
         // Fall back to a local snapshot of the applications collection so
