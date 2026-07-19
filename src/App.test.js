@@ -109,7 +109,7 @@ describe("Routing", () => {
 });
 
 describe("/games route (Redux + API integration, axios mocked)", () => {
-    test("shows a loading state and then renders games returned by the API", async () => {
+    test("shows a loading state and then renders games from a bare-array response (old API shape)", async () => {
         apiClient.get.mockResolvedValueOnce({
             data: [
                 {
@@ -136,6 +136,26 @@ describe("/games route (Redux + API integration, axios mocked)", () => {
         );
     });
 
+    test("renders games from a { success, data } envelope response (new API shape)", async () => {
+        apiClient.get.mockResolvedValueOnce({
+            data: {
+                success: true,
+                data: [
+                    {
+                        _id: "1",
+                        Title: "Enveloped Game",
+                        Description: "Returned inside { success, data }.",
+                        Thumbnail: "/images/test-thumb.png",
+                    },
+                ],
+            },
+        });
+
+        renderAtRoute("/games", { store: createTestStore() });
+
+        expect(await screen.findByRole("heading", { name: /enveloped game/i })).toBeInTheDocument();
+    });
+
     test("falls back to the local games snapshot when the API request fails", async () => {
         apiClient.get.mockRejectedValueOnce(new Error("Request failed with status code 404"));
 
@@ -144,6 +164,19 @@ describe("/games route (Redux + API integration, axios mocked)", () => {
         // gamesSlice catches the API error and resolves with the local
         // src/data/games.json snapshot instead of rejecting, so the page
         // should render the fallback games rather than an error message.
+        expect(await screen.findByRole("heading", { name: /spaceglider/i })).toBeInTheDocument();
+        expect(screen.getByRole("heading", { name: /virushunt/i })).toBeInTheDocument();
+        expect(screen.queryByText(/couldn't load/i)).not.toBeInTheDocument();
+    });
+
+    test("falls back to the local games snapshot when the API returns a malformed envelope", async () => {
+        // A 200 response that is neither a bare array nor a { data: [...] }
+        // envelope (e.g. { success: true } with no `data` array) must be
+        // treated as an error, not rendered as an empty games list.
+        apiClient.get.mockResolvedValueOnce({ data: { success: true } });
+
+        renderAtRoute("/games", { store: createTestStore() });
+
         expect(await screen.findByRole("heading", { name: /spaceglider/i })).toBeInTheDocument();
         expect(screen.getByRole("heading", { name: /virushunt/i })).toBeInTheDocument();
         expect(screen.queryByText(/couldn't load/i)).not.toBeInTheDocument();
