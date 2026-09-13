@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="User manual for Bakeneko — a macOS tool for baking and generating PBR texture maps. Import and bake, derive maps, build the material in layers, paint on the model, and export per engine.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bakeneko Manual">
+<meta property="og:description" content="Bake maps from a high-poly mesh, build the material in layers, paint on the model, and export it the way your engine wants it.">
+<title>Bakeneko Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="/styles/bakeneko-manual.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="mast">
+    <p class="kicker">User manual · Bakeneko 1.3</p>
+    <h1 class="title">Bakeneko</h1>
+    <p class="thesis">Bake maps from a high-poly mesh, build the material in <b>layers</b>, paint on the model, and export it the way your engine wants it.</p>
+
+    <div class="meta-row">
+      <span class="chip"><b>macOS 14+</b> · Apple Silicon</span>
+      <span class="chip">Imports <b>OBJ · glTF/GLB · FBX</b></span>
+      <span class="chip">Bakes on <b>Metal ray tracing</b></span>
+      <span class="chip">Exports <b>PNG · TIFF · TGA · EXR</b></span>
+    </div>
+  </header>
+
+  <section class="index">
+    <h2>Workflow</h2>
+    <p class="note">The numbering is the dependency order, not a table of contents: each step needs the one above it to have happened. After the first pass you'll jump around freely — the two reference cards at the end are for that.</p>
+    <ol>
+      <li><span class="n">01</span><div><div class="l">Import your model</div><div class="t">Scene sidebar</div></div></li>
+      <li><span class="n">02</span><div><div class="l">Bake the maps</div><div class="t">Bake panel</div></div></li>
+      <li><span class="n">03</span><div><div class="l">Read the viewport</div><div class="t">Centre column</div></div></li>
+      <li><span class="n">04</span><div><div class="l">Derive more maps</div><div class="t">Derived Maps</div></div></li>
+      <li><span class="n">05</span><div><div class="l">Build the material in layers</div><div class="t">Layers</div></div></li>
+      <li><span class="n">06</span><div><div class="l">Paint</div><div class="t">Viewport &amp; 2D canvas</div></div></li>
+      <li><span class="n">07</span><div><div class="l">Inspect a map closely</div><div class="t">Preview</div></div></li>
+      <li><span class="n">08</span><div><div class="l">Export for your engine</div><div class="t">Export</div></div></li>
+      <li><span class="n">09</span><div><div class="l">Save the project</div><div class="t">File menu</div></div></li>
+    </ol>
+  </section>
+
+  <!-- ============ 01 ============ -->
+  <article class="chapter">
+    <div class="stage">
+      <div class="head">
+        <span class="num">01</span>
+        <span class="eyebrow">Getting in</span>
+        <span class="where">Scene sidebar</span>
+      </div>
+      <h3 class="chapter-title">Import your model</h3>
+      <p class="lead"><span class="hl">Import Model</span> at the top of the left sidebar reads <span class="hlc">OBJ</span>, <span class="hlc">glTF / GLB</span> and <span class="hlc">FBX</span>. Import the low-poly mesh you'll texture; the high-poly you bake from is optional.</p>
+
+      <div class="diagram" role="img" aria-label="Pipeline: imported meshes form bake groups, the baker produces maps, derived maps and layers build the material, painting feeds layer masks, and export writes files.">
+        <svg viewBox="0 0 720 232" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace">
+          <defs>
+            <marker id="a1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+              <path d="M0 0 L8 4.5 L0 9 z" fill="#9698b0"/>
+            </marker>
+            <marker id="a2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+              <path d="M0 0 L8 4.5 L0 9 z" fill="#e8b14c"/>
+            </marker>
+          </defs>
+
+          <rect x="8" y="26" width="150" height="54" rx="10" fill="#1b1e2e" stroke="#2a2d40"/>
+          <text x="83" y="49" fill="#ecedf4" font-size="13" font-weight="700" text-anchor="middle">Meshes</text>
+          <text x="83" y="66" fill="#9698b0" font-size="10.5" text-anchor="middle">low + high</text>
+
+          <rect x="196" y="26" width="150" height="54" rx="10" fill="#20222f" stroke="#3a3d54"/>
+          <text x="271" y="49" fill="#e8b14c" font-size="13" font-weight="700" text-anchor="middle">Baked maps</text>
+          <text x="271" y="66" fill="#9698b0" font-size="10.5" text-anchor="middle">normal · AO · curvature</text>
+
+          <rect x="384" y="26" width="150" height="54" rx="10" fill="#1b1e2e" stroke="#2a2d40"/>
+          <text x="459" y="49" fill="#ecedf4" font-size="13" font-weight="700" text-anchor="middle">Derived maps</text>
+          <text x="459" y="66" fill="#9698b0" font-size="10.5" text-anchor="middle">op chains</text>
+
+          <rect x="196" y="132" width="150" height="54" rx="10" fill="#20222f" stroke="#3a3d54"/>
+          <text x="271" y="155" fill="#e8b14c" font-size="13" font-weight="700" text-anchor="middle">Layer stack</text>
+          <text x="271" y="172" fill="#9698b0" font-size="10.5" text-anchor="middle">fills · masks · blends</text>
+
+          <rect x="8" y="132" width="150" height="54" rx="10" fill="#1b1e2e" stroke="#2a2d40"/>
+          <text x="83" y="155" fill="#49cbc1" font-size="13" font-weight="700" text-anchor="middle">Brush</text>
+          <text x="83" y="172" fill="#9698b0" font-size="10.5" text-anchor="middle">3D and 2D strokes</text>
+
+          <rect x="384" y="132" width="150" height="54" rx="10" fill="#1b1e2e" stroke="#2a2d40"/>
+          <text x="459" y="155" fill="#ecedf4" font-size="13" font-weight="700" text-anchor="middle">Material</text>
+          <text x="459" y="172" fill="#9698b0" font-size="10.5" text-anchor="middle">per-channel result</text>
+
+          <rect x="572" y="79" width="140" height="54" rx="10" fill="#1b1e2e" stroke="#2a2d40"/>
+          <text x="642" y="102" fill="#49cbc1" font-size="13" font-weight="700" text-anchor="middle">Export</text>
+          <text x="642" y="119" fill="#9698b0" font-size="10.5" text-anchor="middle">per engine</text>
+
+          <line x1="158" y1="53" x2="194" y2="53" stroke="#e8b14c" stroke-width="1.5" marker-end="url(#a2)"/>
+          <line x1="346" y1="53" x2="382" y2="53" stroke="#9698b0" stroke-width="1.4" marker-end="url(#a1)"/>
+          <line x1="459" y1="80" x2="459" y2="130" stroke="#9698b0" stroke-width="1.4" marker-end="url(#a1)"/>
+          <line x1="271" y1="80" x2="271" y2="130" stroke="#e8b14c" stroke-width="1.5" marker-end="url(#a2)"/>
+          <line x1="158" y1="159" x2="194" y2="159" stroke="#49cbc1" stroke-width="1.5" marker-end="url(#a1)"/>
+          <line x1="346" y1="159" x2="382" y2="159" stroke="#9698b0" stroke-width="1.4" marker-end="url(#a1)"/>
+          <line x1="534" y1="140" x2="600" y2="136" stroke="#49cbc1" stroke-width="1.5" marker-end="url(#a1)"/>
+          <text x="548" y="128" fill="#63667e" font-size="10">composited</text>
+          <line x1="534" y1="46" x2="600" y2="78" stroke="#63667e" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#a1)"/>
+          <text x="540" y="34" fill="#63667e" font-size="10">raw maps</text>
+        </svg>
+      </div>
+
+      <ul class="points">
+        <li><b>Name meshes to pair them.</b> A mesh ending in <code>_low</code> and one ending in <code>_high</code> with the same base name become one bake group automatically — <code>barrel_low</code> + <code>barrel_high</code> → group <b>barrel</b>.</li>
+        <li><b>Or pair them by hand.</b> The stack icon on a mesh row opens a popover: pick the group name and whether this mesh is the Low or the High. Manual assignment overrides the name matching.</li>
+        <li><b>Fix the orientation on import.</b> The rotate icon on a mesh row has <b>Source: Z-up (Blender/Max)</b> plus 90° rotations around X, Y and Z. FBX files declare their own axis, and are converted on the way in.</li>
+        <li><b>Hide what's in the way.</b> The eye toggles a mesh in the viewport; hiding the high-poly is the usual way to look at the low while baking onto it.</li>
+        <li><b>Read the warnings.</b> Missing UVs, missing tangents and similar problems appear under <b>Warnings</b> in the sidebar before you waste a bake on them.</li>
+      </ul>
+    </div>
+    <div class="trough">
+      <p class="trough-label">Practical note</p>
+      <p>The Open dialog also lists <code>.usd</code>, <code>.usdc</code> and <code>.usdz</code>, but <span class="flag">USD import is not implemented yet</span> — picking one reports a "not implemented" error rather than importing anything. Export from your DCC as FBX or glTF for now.</p>
+      <p><strong>No high-poly?</strong> The Bake panel says <code>Mode: self-bake</code> and bakes the low mesh against itself. Useful for AO and curvature on a model that was never a high/low pair.</p>
+    </div>
+  </article>
+
+  <!-- ============ 02 ============ -->
+  <article class="chapter">
+    <div class="stage">
+      <div class="head">
+        <span class="num">02</span>
+        <span class="eyebrow">The baker</span>
+        <span class="where">Right panel · Bake</span>
+      </div>
+      <h3 class="chapter-title">Bake the maps</h3>
+      <p class="lead">Pick a map at the top of the Bake section, set how far the rays travel, and press <span class="hl">Bake</span>. Baking runs on the GPU's ray-tracing hardware and reports progress with a <span class="hlc">Cancel</span> next to it.</p>
+
+      <dl class="defs">
+        <div class="def"><dt>Map</dt><dd>Normal, AO, Curvature — and below the divider, Thickness, Position, World Normal, Material ID, Bent Normal.</dd></div>
+        <div class="def"><dt>Ray dist</dt><dd>Rays start this far outside the low mesh and travel inward. <span class="sub">Raise it until missing (skipped) areas fill in; lower it if the bake picks up geometry that belongs to a neighbouring part.</span></dd></div>
+        <div class="def"><dt>Auto cage</dt><dd>Uses the low mesh pushed outward along its own normals instead of a fixed distance. <span class="sub">Better on models whose parts vary in thickness.</span></dd></div>
+        <div class="def"><dt>Custom cage</dt><dd>Import your own cage mesh. <span class="sub">It must have the same vertex count as the low mesh — the app checks and refuses a mismatch.</span></dd></div>
+        <div class="def"><dt>Resolution</dt><dd>512 · 1K · 2K · 4K · 8K, or type a non-square width and height.</dd></div>
+        <div class="def"><dt>Supersample</dt><dd>Off · 2× · 4×. <span class="sub">Bakes larger and downsamples — the cheapest fix for stair-stepped edges.</span></dd></div>
+        <div class="def"><dt>Invert Y — DirectX</dt><dd>Off writes OpenGL-style normals (green up, what Unity and glTF expect); on writes DirectX-style (green down, what Unreal expects).</dd></div>
+        <div class="def"><dt>UV Channel</dt><dd>Appears when the mesh has more than one UV set; each map category remembers its own choice.</dd></div>
+        <div class="def"><dt>UDIM Tile</dt><dd>Appears when the UVs span more than one tile. Bake tiles one at a time; export writes every tile you've baked.</dd></div>
+      </dl>
+
+      <p class="punch">Bake <b>Normal first</b> — it's the map that tells you whether the cage is right.</p>
+    </div>
+    <div class="trough">
+      <p class="trough-label">If it looks wrong</p>
+      <p><strong>Coloured blotches or hard seams across the normal map</strong> usually mean rays are reaching the wrong surface: lower <b>Ray dist</b>, or switch to <b>Auto cage</b>.</p>
+      <p><strong>Empty patches</strong> mean rays never reached the high-poly at all — raise <b>Ray dist</b>, or check that both meshes actually overlap in space (the rotate menu's Z-up toggle fixes the common import mismatch).</p>
+      <p><strong>Green channel looks inverted</strong> in your engine: that's the <b>Invert Y — DirectX</b> toggle, and the batch export warns you when it disagrees with the export preset you picked.</p>
+      <p>Open <b>Debug maps</b> to bake Coverage — it shows, per texel, whether a ray hit, missed, or landed outside the UV islands. It answers the "why is this area empty" question directly.</p>
+    </div>
+  </article>
+
+  <!-- ============ 03 ============ -->
+  <article class="chapter">
+    <div class="stage">
+      <div class="head">
+        <span class="num">03</span>
+        <span class="eyebrow">Looking at it</span>
+        <span class="where">Centre column</span>
+      </div>
+      <h3 class="chapter-title">Read the viewport</h3>
+      <p class="lead">The viewport is a real-time PBR preview, not a thumbnail: it shows the composited material as you edit it, lit by an HDRI you choose.</p>
+      <ul class="points">
+        <li><b>Material</b> — the full shaded result of the layer stack and material settings.</li>
+        <li><b>Isolate</b> — one map flat on the model, without lighting. While you're painting it follows the channel that layer writes into (Base Color shows base colour, Normal shows the normal map); otherwise it shows whichever map the Bake panel is previewing. A caption under the picker names what you're looking at.</li>
+        <li><b>Wireframe</b> and <b>UV</b> — the low mesh's topology, and its UV layout drawn onto the surface.</li>
+        <li><b>Normals</b> — a toggle that draws the vertex-normal hairs, for checking orientation.</li>
+        <li><b>UV grid</b> — draws the UV grid onto the shaded model, so you can see where the seams run and how much the UVs are stretched without leaving the material to go look at the layout.</li>
+        <li><b>Camera:</b> drag to orbit, <kbd>⌘</kbd>-drag to pan, scroll to zoom, <kbd>F</kbd> to frame the model. When a paint layer is selected, plain dragging paints instead — hold <kbd>⌥</kbd> to orbit.</li>
+        <li><b>Three floating panels</b> open from the icons on the right edge: <b>Material</b> (workflow, base colour, metallic, roughness, map bindings), <b>Environment</b> (HDRI, intensity, rotation) and <b>Layers</b>.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ============ 04 ============ -->
+  <article class="chapter">
+    <div class="stage">
+      <div class="head">
+        <span class="num">04</span>
+        <span class="eyebrow">Map derivation</span>
+        <span class="where">Right panel · Derived Maps</span>
+      </div>
+      <h3 class="chapter-title">Derive more maps</h3>
+      <p class="lead">A derived map is a <span class="hl">source plus an ordered chain of operations</span>, recomputed on demand — nothing is baked into a file until you export it, so you can go back and change any step.</p>
+      <ul class="points">
+        <li><b>Sources:</b> any baked map, or a texture you import into the panel.</li>
+        <li><b>Conversions:</b> Height → Normal, Normal → Height, Curvature from Normal or from Height.</li>
+        <li><b>From albedo:</b> AO, Roughness and Metallic estimates.</li>
+        <li><b>Adjustments:</b> invert, levels/clamp/remap, curves, Gaussian blur, sharpen, channel extract, swizzle and combine.</li>
+        <li><b>Each operation has its own switch</b> — turn one off to see what it was doing without deleting it and losing its settings.</li>
+      </ul>
+    </div>
+    <div class="trough">
+      <p class="trough-label">Honest about the heuristics</p>
+      <p>The albedo-derived maps are <strong>artistic approximations, not measurements</strong>, and the app says so next to each one. Albedo → AO is a cavity estimate from image contrast — it is not a substitute for a real AO bake against the high-poly. Albedo → Metallic is the least reliable of the three: treat it as a starting point to paint over. Normal → Height is best-effort and depends on matching the source's green-channel convention.</p>
+    </div>
+  </article>
+
+  <!-- ============ 05 ============ -->
+  <article class="chapter">
+    <div class="stage">
+      <div class="head">
+        <span class="num">05</span>
+        <span class="eyebrow">The material</span>
+        <span class="where">Right panel · Layers</span>
+      </div>
+      <h3 class="chapter-title">Build the material in layers</h3>
+      <p class="lead">Layers stack bottom-to-top like any painting app, except each one declares <span class="hl">which PBR channels it writes into</span> — one layer can darken Base Color, raise Roughness and drop Metallic at once.</p>
+      <ul class="points">
+        <li><b>Add Fill Layer</b> — a constant colour or value, or a bound map (baked, derived or imported).</li>
+        <li><b>Channels</b> — the chip row on each layer: Base, Metal, Rough, Normal, AO (or Diffuse, Spec, Gloss in the Specular-Glossiness workflow). Nothing happens until at least one is lit.</li>
+        <li><b>Blend mode and opacity</b> — normal, multiply, screen, overlay, add, subtract.</li>
+        <li><b>Masks</b> — a painted bitmap, a procedural generator (AO, curvature, edge dirt), or an existing map. Masks are what make a layer local instead of covering everything.</li>
+        <li><b>Groups</b> nest layers with their own opacity and blend mode; the eye icon solos a layer's own content in the 2D inspector.</li>
+        <li>The viewport updates as you go — there's no "apply".</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ============ 06 ============ -->
+  <article class="chapter">
+    <div class="stage">
+      <div class="head">
+        <span class="num">06</span>
+        <span class="eyebrow">The brush</span>
+        <span class="where">Viewport &amp; 2D canvas</span>
+      </div>
+      <h3 class="chapter-title">Paint</h3>
+      <p class="lead"><span class="hl">Add Paint Layer</span> creates a layer with an empty mask and makes it the paint target — the brush icon on the layer row lights up. From then on, dragging on the model paints that mask.</p>
+      <ul class="points">
+        <li><b>Two surfaces, one brush:</b> paint directly on the model in the viewport, or on the flat canvas in the Layered Material inspector. Both write the same mask, and both show a brush outline under the cursor.</li>
+        <li><b>Size · Opacity · Flow · Hardness · Spacing.</b> Opacity caps how far one stroke can push a texel; flow is how hard each dab pushes toward that cap. <kbd>[</kbd> and <kbd>]</kbd> step the size without leaving the model.</li>
+        <li><b>Size reads in pixels of the map you're painting</b>, down to a single one — and a dab always marks at least the texel it sits on, so a hairline stroke doesn't come out dashed. The slider's travel is logarithmic, so the fine end isn't crammed into its first few points.</li>
+        <li><b>Brush and eraser are a tool pair</b> — under the viewport's display modes and in the brush panel, with <kbd>B</kbd> and <kbd>E</kbd> to switch from either surface. The eraser is the same brush removing from the mask instead of adding. <b>Undo</b> and <b>Redo</b> work per stroke, per paint layer.</li>
+        <li><b>Shift-click draws a straight line</b> from where the last stroke ended, following the surface. While <kbd>⇧</kbd> is held a dotted guide shows where the line will go; repeated Shift-clicks chain into a polyline, and each line is one undo step.</li>
+        <li><b>Strokes cross UV seams.</b> The brush measures its footprint on the surface in 3D, so a stroke that runs over a seam keeps going on the other side, and a dab is the same size on the model wherever the UVs are stretched.</li>
+        <li><b>Tablet pressure follows the pen through the stroke</b>, on the model and on the 2D canvas, scaling size and opacity as you press harder or lift. What it maps to, how much a feather-light touch still paints, and the response curve are in <b>Settings ▸ Tablet</b> — which also has a live meter for confirming the pen is being seen at all. A mouse reads as full pressure, so nothing changes without a tablet.</li>
+      </ul>
+      <p class="punch">A paint layer's mask is the thing you paint — the <b>colour comes from the layer's fill</b>.</p>
+    </div>
+    <div class="trough">
+      <p class="trough-label">Practical note</p>
+      <p><strong>Nothing appears when you drag?</strong> Check that a paint layer is actually the target (its brush icon is lit) and that the layer has at least one channel chip enabled — painting a mask on a layer that writes to no channel changes nothing visible.</p>
+      <p><strong>In the viewport,</strong> plain dragging paints whenever a paint target exists. <kbd>⌥</kbd> orbits and <kbd>⌘</kbd> pans, so you can keep working without switching modes.</p>
+    </div>
+  </article>
+
+  <!-- ============ 07 ============ -->
+  <article class="chapter">
+    <div class="stage">
+      <div class="head">
+        <span class="num">07</span>
+        <span class="eyebrow">The 2D view</span>
+        <span class="where">Right panel · Preview</span>
+      </div>
+      <h3 class="chapter-title">Inspect a map closely</h3>
+      <p class="lead">The inspector shows one map at full resolution with the tools for answering "what is actually in this texel".</p>
+      <ul class="points">
+        <li><b>Channel picker</b> — RGB, R, G, B, A, or luminance.</li>
+        <li><b>Zoom and pan</b> — pinch to zoom, drag to pan, <b>Fit</b> to reset; the percentage is shown next to it.</li>
+        <li><b>Pixel probe</b> — hover to read the coordinate and the channel values under the cursor, with a histogram of the shown channel below.</li>
+        <li><b>UV overlay</b> — draws the mesh's UV wireframe over the map, in a colour you pick (every map reads differently, so no single colour works on all of them).</li>
+        <li><b>Export PNG…</b> writes just the map you're looking at.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ============ 08 ============ -->
+  <article class="chapter">
+    <div class="stage">
+      <div class="head">
+        <span class="num">08</span>
+        <span class="eyebrow">Getting out</span>
+        <span class="where">Right panel · Export</span>
+      </div>
+      <h3 class="chapter-title">Export for your engine</h3>
+      <p class="lead"><span class="hl">Export all maps…</span> writes every baked map for every baked UDIM tile into a folder, plus one packed map if you choose a target. Names come from the template — <code>$mesh</code>, <code>$map</code> and <code>$udim</code>, which drops out entirely for a single-tile model.</p>
+
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th>Pack for</th><th>R</th><th>G</th><th>B</th><th>A</th><th>Where it goes</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="preset">glTF (ORM)</td>
+              <td class="ch">AO</td><td class="ch">Rough</td><td class="ch">Metal</td><td class="ch"><span class="none">—</span></td>
+              <td>Occlusion + metallicRoughness, one texture</td>
+            </tr>
+            <tr>
+              <td class="preset">Unreal Engine (ORM)</td>
+              <td class="ch">AO</td><td class="ch">Rough</td><td class="ch">Metal</td><td class="ch"><span class="none">—</span></td>
+              <td>Uncheck sRGB in the Texture Editor</td>
+            </tr>
+            <tr>
+              <td class="preset">Unity URP</td>
+              <td class="ch">Metal</td><td class="ch">Occlusion</td><td class="ch"><span class="none">unused</span></td><td class="ch">Smooth</td>
+              <td>Assign to both Metallic and Occlusion</td>
+            </tr>
+            <tr>
+              <td class="preset">Unity HDRP</td>
+              <td class="ch">Metal</td><td class="ch">Occlusion</td><td class="ch">Detail mask</td><td class="ch">Smooth</td>
+              <td>Assign to Mask Map</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ul class="points">
+        <li><b>Formats:</b> PNG and TIFF (16-bit for normals, 8-bit otherwise), TGA (8-bit), and EXR at full 32-bit float.</li>
+        <li><b>Every packed map is data, not colour</b> — disable sRGB on import in all four engines, or your roughness will be wrong in a way that's hard to see and easy to ship.</li>
+        <li><b>Packed files are named for their layout</b> — <code>_orm</code>, <code>_urp_mask</code>, <code>_hdrp_mask</code> — so a folder of exports says what's in each file.</li>
+      </ul>
+    </div>
+    <div class="trough">
+      <p class="trough-label">Normal maps point two ways</p>
+      <p>Unreal expects <strong>DirectX-style</strong> normals (green down); Unity and glTF expect <strong>OpenGL-style</strong> (green up, Y+). Bakeneko writes OpenGL unless <b>Invert Y — DirectX</b> is on when you bake.</p>
+      <p>A batch export <span class="ok">checks this for you</span>: if the exported normal map disagrees with the preset you picked, the Console gets a warning naming the fix. It's a warning and not an automatic flip, because the convention is a bake setting — changing it silently would make the file disagree with the model you've been looking at.</p>
+    </div>
+  </article>
+
+  <!-- ============ 09 ============ -->
+  <article class="chapter">
+    <div class="stage">
+      <div class="head">
+        <span class="num">09</span>
+        <span class="eyebrow">Keeping it</span>
+        <span class="where">File menu</span>
+      </div>
+      <h3 class="chapter-title">Save the project</h3>
+      <p class="lead">A <code>.pbrproj</code> holds the whole session: imported model references, bake settings, the material, the derived-map graph, the layer stack, and the pixels you painted.</p>
+      <ul class="points">
+        <li><b>Baked maps are cached inside the project</b>, so reopening doesn't mean re-baking.</li>
+        <li><b>Painted layers are stored, not regenerated</b> — they're the one thing in the project that can't be recomputed from anything else.</li>
+        <li><b>Models and HDRIs are referenced</b> by a sandbox bookmark rather than copied in, so moving or renaming the source file will be noticed on open.</li>
+        <li><b>Recent projects</b> live in the File menu; unsaved work prompts before it can be lost.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ============ REF: keyboard ============ -->
+  <article class="chapter">
+    <div class="stage">
+      <div class="head">
+        <span class="num ref">REF</span>
+        <span class="eyebrow">Reference</span>
+        <span class="where">Keyboard</span>
+      </div>
+      <h3 class="chapter-title">Every shortcut</h3>
+      <div class="keys">
+        <div class="key"><span class="k"><kbd>⌘N</kbd></span><span class="d">New project</span></div>
+        <div class="key"><span class="k"><kbd>⌘O</kbd></span><span class="d">Open project</span></div>
+        <div class="key"><span class="k"><kbd>⌘S</kbd></span><span class="d">Save project</span></div>
+        <div class="key"><span class="k"><kbd>⇧⌘S</kbd></span><span class="d">Save project as</span></div>
+        <div class="key"><span class="k"><kbd>⇧⌘C</kbd></span><span class="d">Open the Console window</span></div>
+        <div class="key"><span class="k"><kbd>⌘,</kbd></span><span class="d">Settings</span></div>
+        <div class="key"><span class="k"><kbd>F</kbd></span><span class="d">Frame the model in the viewport</span></div>
+        <div class="key"><span class="k"><kbd>⌥</kbd> drag</span><span class="d">Orbit while a paint layer is active</span></div>
+        <div class="key"><span class="k"><kbd>⌘</kbd> drag</span><span class="d">Pan the camera</span></div>
+        <div class="key"><span class="k">scroll</span><span class="d">Zoom</span></div>
+        <div class="key"><span class="k"><kbd>[</kbd> <kbd>]</kbd></span><span class="d">Brush size down / up</span></div>
+        <div class="key"><span class="k"><kbd>B</kbd> <kbd>E</kbd></span><span class="d">Brush / eraser</span></div>
+        <div class="key"><span class="k"><kbd>⇧</kbd> click</span><span class="d">Straight line from the last stroke</span></div>
+        <div class="key"><span class="k">drag</span><span class="d">Paint, whenever a paint layer is the target</span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============ REF: settings & trouble ============ -->
+  <article class="chapter">
+    <div class="stage">
+      <div class="head">
+        <span class="num ref">REF</span>
+        <span class="eyebrow">Reference</span>
+        <span class="where">Settings &amp; Console</span>
+      </div>
+      <h3 class="chapter-title">Settings, and what to do when something is off</h3>
+      <dl class="defs">
+        <div class="def"><dt>New project defaults</dt><dd>Resolution and supersample for new projects, and whether <b>Invert Y — DirectX</b> starts on. <span class="sub">They apply to the next project, not the open one.</span></dd></div>
+        <div class="def"><dt>Tablet</dt><dd>Its own tab: a master switch for pen pressure, whether pressure drives size, opacity or both, how much a feather-light touch still paints, and a response curve for holding light touches back. <span class="sub">The meter at the bottom follows the pen live — press on the tablet to confirm the app sees it before blaming the brush.</span></dd></div>
+        <div class="def"><dt>Prefer CPU baker</dt><dd>Forces the deterministic CPU reference baker instead of GPU ray tracing. <span class="sub">Slower — it exists to tell a GPU-specific bake problem from a real one.</span></dd></div>
+        <div class="def"><dt>Console <kbd>⇧⌘C</kbd></dt><dd>Every import, bake, export and error in order, with the exported filenames. <span class="sub">The first place to look when a bake or an export didn't do what you expected.</span></dd></div>
+      </dl>
+      <ul class="points">
+        <li><b>The model imported but the viewport is empty</b> — check the eye icons in the sidebar, then press <kbd>F</kbd> to frame; a mesh authored in different units can land far outside the camera.</li>
+        <li><b>The bake is stretched or mirrored</b> — the model's UVs overlap or run outside 0–1. Switch the viewport to <b>UV</b> to see the layout on the surface.</li>
+        <li><b>A map looks right in the app and wrong in the engine</b> — nearly always the sRGB import setting on a data map, or the normal-map green channel. Both are covered in <b>08</b>.</li>
+        <li><b>Painting feels heavy at 4K or 8K</b> — a stroke only recomputes the area it touches, but the canvas still has to be composited; drop the bake resolution while blocking things in, then raise it.</li>
+      </ul>
+    </div>
+  </article>
+
+  <footer>
+    <span><b>Bakeneko</b> 1.3 · user manual</span>
+    <span>macOS 14+ · Apple Silicon</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
