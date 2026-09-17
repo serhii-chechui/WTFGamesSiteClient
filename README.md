@@ -12,18 +12,16 @@ npm run build    # production build into ./build
 
 ## Configuration
 
-The games/applications API base URL is read from the `REACT_APP_API_URL`
-environment variable (see `src/api/client.js`). Copy `.env.example` to `.env`
-(gitignored, not committed) to override it, e.g. to point at a local or
-staging backend:
+The games/applications API URL must be configured through `REACT_APP_API_URL`.
+`.env.development` selects the local API at `http://127.0.0.1:3156/api`;
+`.env.production` explicitly selects `https://api.wtfgames.com.ua/api`.
+There is no production fallback in JavaScript. An empty setting raises an error
+when the API client initializes.
 
-```bash
-cp .env.example .env
-```
-
-If `.env` is absent or the variable isn't set, the app falls back to the
-current production API, so `npm start` / `npm run build` work out of the box
-without any local configuration.
+To override local development, copy `.env.example` to `.env.development.local`.
+For staging builds, set the variable in CI or `.env.production.local`.
+Restart the dev server or rebuild after changing configuration. These frontend
+values are public; never put credentials in `REACT_APP_*` variables.
 
 ## Static policy pages
 
