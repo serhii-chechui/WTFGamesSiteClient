@@ -10,7 +10,7 @@ All live as siblings under `~/Work/web/wtfgames/`:
 
 | Path | Role | Remote |
 |------|------|--------|
-| `wtfgames-site` | **This repo** — public frontend / customer-facing website | GitHub `serhii-chechui/WTFGamesSiteClient` |
+| `wtfgames-site` | **This repo** — public frontend / customer-facing website | Bitbucket `wtf_games/wtfgamessiteclient` (private, `origin`) + GitHub `serhii-chechui/WTFGamesSiteClient` (public) |
 | `wtfgames-site-admin` | Admin panel / management UI | Bitbucket `wtf_games/wtfgamessiteadmin` |
 | `wtfgames-site-api` | Backend — REST API (Express + MongoDB) | GitHub `serhii-chechui/wtfgames-api` |
 
@@ -39,16 +39,26 @@ panel). Backend changes belong in `wtfgames-site-api`, not here.
 - **git-flow**: `main` (production) / `develop` (integration) / `feature/*`.
 - Releases are tagged `vX.Y.Z` on `main`.
 - Commit locally; do not push unless explicitly asked.
+- **Dual remote:** `origin` (Bitbucket, the private canonical repo) is configured
+  to push to **both** Bitbucket and the public GitHub in one `git push origin main`.
+  There is also a separate `github.com` remote pointing at the public GitHub.
+  Vercel needs the **public GitHub** `main` to deploy (see below).
 
-## Deployment (production = AWS EC2)
+## Deployment (production = Vercel)
 
-There is **no CI/CD** in the repos — no pipeline, Dockerfile, or deploy script is
-committed. Pushing `main` does **not** auto-deploy; the EC2 rollout is a manual
-step performed by the maintainer.
+**This repo is deployed by Vercel**, which builds the CRA app (`npm run build`,
+output `build/`) from the **public GitHub** repo's `main` branch on push. Vercel
+requires the public GitHub repo; the Bitbucket `origin` is the private canonical
+repo (see *Dual remote* above). Because `origin` dual-pushes to both, a single
+`git push origin main` both updates the private repo and triggers the Vercel
+production deploy.
 
-- **This repo:** built locally (`npm run build`) and the resulting `build/`
-  bundle is uploaded to the EC2 host (served as static files).
+- No pipeline/Dockerfile/deploy script is committed to the repo — the build runs
+  on Vercel, not in CI here.
+- Static files in `public/` (favicon, images, the standalone doc pages like
+  `bakeneko-manual-en.html` and `ludorama-*`) are copied verbatim into `build/`
+  by CRA and served at the site root, reachable by direct URL.
 - **Production domains** (all under `wtfgames.com.ua`):
-  - public site (this repo) — served under `wtfgames.com.ua`
+  - public site (this repo, on Vercel) — served under `wtfgames.com.ua`
   - `admin.wtfgames.com.ua` — admin panel
   - `api.wtfgames.com.ua` — the backend API
