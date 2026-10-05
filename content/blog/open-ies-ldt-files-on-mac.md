@@ -61,7 +61,7 @@ There are some options in specific ecosystems, for example plugins for 3D and CA
 
 ### 5. LumaScope
 
-[LumaScope](https://apps.apple.com/app/lumascope/id6759007715) is a native macOS app we make for exactly this job: open a photometric file and see what is in it. It is a viewer, not a lighting calculation tool. It will not replace DIALux or Relux for designing a lighting scheme.
+[LumaScope](https://apps.apple.com/app/apple-store/id6759007715?pt=PT&ct=blog-ies-ldt-mac&mt=12) is a native macOS app we make for exactly this job: open a photometric file and see what is in it. It is a viewer, not a lighting calculation tool. It will not replace DIALux or Relux for designing a lighting scheme.
 
 What it does:
 
