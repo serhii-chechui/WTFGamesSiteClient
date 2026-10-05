@@ -187,7 +187,7 @@ hr{border:0;border-top:1px solid #343a40;margin:2.5rem 0}
 @media (min-width:992px){
 .nav-toggle,.js .nav-toggle{display:none}
 .nav-menu,.js .nav-menu{display:flex;flex-grow:0;flex-basis:auto;align-items:center;margin-left:auto}
-.nav-main{display:flex;align-items:center;margin-right:16px}
+.site-header .nav-main{display:flex;align-items:center;margin-right:16px}
 .nav-social{display:flex;align-items:center}
 .site-header .nav-link{padding:8px}
 }
