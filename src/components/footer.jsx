@@ -10,6 +10,10 @@ const Footer = () => {
                     <small>&copy; {new Date().getFullYear()} WTFGames. All rights reserved.</small>
                 </div>
                 <div className="d-flex gap-3">
+                    {/* Plain anchor: /blog/ is static HTML served outside the SPA. */}
+                    <a href="/blog/" className="text-light text-decoration-none">
+                        Blog
+                    </a>
                     <NavLink to="/privacy" className="text-light text-decoration-none">
                         Privacy Policy
                     </NavLink>

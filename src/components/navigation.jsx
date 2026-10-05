@@ -50,6 +50,13 @@ const Navigation = () => {
                                     Applications
                                 </NavLink>
                             </li>
+                            <li className="nav-item">
+                                {/* Plain anchor on purpose: /blog/ is static HTML outside the SPA,
+                                    so it needs a full page load, not a React Router transition. */}
+                                <a className="nav-link" href="/blog/">
+                                    Blog
+                                </a>
+                            </li>
                             {/* <li className="nav-item">
                                 <NavLink className="nav-link" to="/careers">
                                     Careers
