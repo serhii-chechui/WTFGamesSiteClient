@@ -7,7 +7,6 @@ cover: cover.jpg
 coverAlt: "LumaScope showing the polar light distribution of an EULUMDAT file on macOS"
 lang: en
 tags: [macOS, lighting, photometry]
-draft: true
 ---
 
 You downloaded a luminaire's photometric data and got a file ending in `.ies` or `.ldt`. Double-clicking it on a Mac either does nothing or opens a text editor full of numbers. This article explains what these files are and lists the realistic ways to look at them on macOS.
@@ -81,7 +80,7 @@ Comparing luminaires is often the real question: which of these three fixtures g
 
 ![Three LDT files compared in LumaScope](compare-files.jpg)
 
-Requirements: macOS 14 (Sonoma) or later. It is sold on the Mac App Store; TODO(price): confirm the price before publishing. At the time of writing the US App Store page lists $9.99, and prices vary by country.
+Requirements: macOS 14 (Sonoma) or later. It is sold on the Mac App Store for $9.99 in the US; prices vary by country.
 
 ## Which option should you pick?
 
