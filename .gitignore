@@ -54,3 +54,6 @@ pnpm-lock.yaml
 # Optional: ignore local SSL certs or mock data
 certs/
 mock-data/
+# Generated blog HTML (scripts/build-blog.js); cover images and other assets in public/blog/ are committed
+public/blog/index.html
+public/blog/*/index.html

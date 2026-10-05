@@ -9,14 +9,18 @@ const Footer = () => {
                 <div className="text-center text-md-start mb-2 mb-md-0">
                     <small>&copy; {new Date().getFullYear()} WTFGames. All rights reserved.</small>
                 </div>
-                <div className="d-flex gap-3">
-                    <NavLink to="/privacy" className="text-light text-decoration-none">
+                <div className="d-flex flex-wrap justify-content-center justify-content-md-end column-gap-3 row-gap-1">
+                    {/* Plain anchor: /blog/ is static HTML served outside the SPA. */}
+                    <a href="/blog/" className="text-light text-decoration-none text-nowrap">
+                        Blog
+                    </a>
+                    <NavLink to="/privacy" className="text-light text-decoration-none text-nowrap">
                         Privacy Policy
                     </NavLink>
-                    <NavLink to="/terms" className="text-light text-decoration-none">
+                    <NavLink to="/terms" className="text-light text-decoration-none text-nowrap">
                         Terms of Service
                     </NavLink>
-                    <NavLink to="/contact" className="text-light text-decoration-none">
+                    <NavLink to="/contact" className="text-light text-decoration-none text-nowrap">
                         Contact
                     </NavLink>
                 </div>
