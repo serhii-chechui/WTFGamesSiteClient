@@ -17,7 +17,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "blog": "node scripts/build-blog.js",
+    "blog:drafts": "node scripts/build-blog.js --drafts",
+    "prebuild": "npm run blog",
     "build": "react-scripts build",
+    "build:preview": "npm run blog:drafts && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -49,6 +53,8 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.1"
+    "@testing-library/user-event": "^14.6.1",
+    "gray-matter": "^4.0.3",
+    "marked": "^18.0.14"
   }
 }
