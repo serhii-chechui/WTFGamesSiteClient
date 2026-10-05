@@ -170,6 +170,7 @@ hr{border:0;border-top:1px solid #343a40;margin:2.5rem 0}
 @media (min-width:1400px){.container{max-width:1320px}}
 .site-header,.site-footer{background:#212529;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif;font-size:16px;line-height:1.5}
 .site-header ul,.site-footer ul{list-style:none;margin:0;padding:0}
+.site-header li,.site-footer li{margin:0;line-height:1.5}
 .hbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding-top:8px;padding-bottom:8px}
 .brand{display:inline-block;padding:5px 0;margin-right:16px;line-height:inherit}
 .brand img{display:block;height:40px;width:auto;max-width:clamp(160px,70vw,288px);border-radius:0}
@@ -179,22 +180,22 @@ hr{border:0;border-top:1px solid #343a40;margin:2.5rem 0}
 .nav-menu{flex-basis:100%;flex-grow:1}
 .js .nav-menu{display:none}
 .js .nav-menu.open{display:block}
-.site-header .nav-link{display:block;padding:8px 0;color:rgba(255,255,255,.55);text-decoration:none}
+.site-header .nav-link{display:flex;align-items:center;min-height:40px;padding:8px 0;color:rgba(255,255,255,.55);text-decoration:none}
 .site-header .nav-link:hover{color:rgba(255,255,255,.75)}
 .site-header .nav-link[aria-current="page"]{color:#fff}
 .site-header .nav-link svg{height:1em;width:auto;vertical-align:-.125em;fill:currentColor}
 @media (min-width:992px){
 .nav-toggle,.js .nav-toggle{display:none}
-.nav-menu,.js .nav-menu{display:flex;flex-basis:auto;align-items:center;margin-left:auto}
-.nav-main{display:flex;margin-right:16px}
-.nav-social{display:flex}
+.nav-menu,.js .nav-menu{display:flex;flex-grow:0;flex-basis:auto;align-items:center;margin-left:auto}
+.nav-main{display:flex;align-items:center;margin-right:16px}
+.nav-social{display:flex;align-items:center}
 .site-header .nav-link{padding:8px}
 }
 .fbar{display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding-top:24px;padding-bottom:24px;color:#f8f9fa}
 .fcopy{margin-bottom:8px;text-align:center}
 .fcopy small{font-size:.875em}
 .site-footer ul{display:flex;gap:16px}
-.site-footer a{color:#f8f9fa;text-decoration:none}
+.site-footer a{display:block;color:#f8f9fa;text-decoration:none}
 @media (min-width:768px){.fbar{flex-direction:row}.fcopy{margin-bottom:0;text-align:start}}
 @media (prefers-reduced-motion:no-preference){a{transition:color .15s}}
 `;
