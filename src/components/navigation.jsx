@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import InstagramIcon from "./icons/InstagramIcon";
+import LinkedInIcon from "./icons/LinkedInIcon";
+import TwitterIcon from "./icons/TwitterIcon";
 
 const Navigation = () => {
     // The mobile menu is controlled by React (not by Bootstrap's JS data-api),
@@ -83,8 +85,9 @@ const Navigation = () => {
                                     href="https://www.instagram.com/wtfgames_community/"
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                aria-label="WTFGames on Instagram"
                                 >
-                                    <i className="fab fa-instagram"></i>
+                                    <InstagramIcon />
                                 </a>
                             </li>
                             <li className="nav-item">
@@ -93,8 +96,9 @@ const Navigation = () => {
                                     href="https://www.linkedin.com/groups/8502086/"
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                aria-label="WTFGames on LinkedIn"
                                 >
-                                    <i className="fab fa-linkedin"></i>
+                                    <LinkedInIcon />
                                 </a>
                             </li>
                             <li className="nav-item">
@@ -103,8 +107,9 @@ const Navigation = () => {
                                     href="https://x.com/wtfgames14?s=21"
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                aria-label="WTFGames on X"
                                 >
-                                    <i className="fab fa-twitter"></i>
+                                    <TwitterIcon />
                                 </a>
                             </li>
                         </ul>

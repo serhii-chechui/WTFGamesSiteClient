@@ -49,3 +49,12 @@ describe("Navigation mobile toggle", () => {
         expect(getMenu()).not.toHaveClass("show");
     });
 });
+
+describe("Navigation social links", () => {
+    test("icon-only links have accessible names", () => {
+        renderNav();
+        expect(screen.getByRole("link", { name: "WTFGames on Instagram" })).toHaveAttribute("href", expect.stringContaining("instagram.com"));
+        expect(screen.getByRole("link", { name: "WTFGames on LinkedIn" })).toBeInTheDocument();
+        expect(screen.getByRole("link", { name: "WTFGames on X" })).toBeInTheDocument();
+    });
+});
