@@ -1,0 +1,34 @@
+# WTFGames
+
+> WTFGames is an indie game studio building mobile games and desktop applications that entertain, challenge, and inspire.
+
+The site lists the studio's games and applications with links to their store pages, plus a blog, privacy policies and product documentation.
+
+## Site
+
+- [Home](https://www.wtfgames.com.ua/): Studio overview
+- [About Us](https://www.wtfgames.com.ua/about): Who the studio is, what it makes and its mission
+- [Games](https://www.wtfgames.com.ua/games): Catalog of games with App Store and Google Play links
+- [Applications](https://www.wtfgames.com.ua/applications): Catalog of desktop and mobile applications
+- [Contact](https://www.wtfgames.com.ua/contact): Business inquiries and social links
+
+## Products
+
+- [SpaceGlider](https://apps.apple.com/ua/app/space-glider-2d/id1500827596): An interstellar runner game full of cosmic adventure
+- [VirusHunt](https://apps.apple.com/ua/app/virus-hunt/id1456015343): A fast-paced arcade game for kids about tapping falling cute viruses
+- [LumaScope](https://apps.apple.com/ua/app/lumascope/id6759007715?mt=12): A modern IES viewer for macOS
+
+## Blog
+
+- [WTFGames Blog](https://www.wtfgames.com.ua/blog/): Articles from the studio
+- [How to open IES and LDT files on a Mac](https://www.wtfgames.com.ua/blog/open-ies-ldt-files-on-mac/): Practical ways to open IES and EULUMDAT photometric files on macOS, with trade-offs
+
+## Documentation and policies
+
+- [Bakeneko Manual](https://www.wtfgames.com.ua/bakeneko-manual-en.html): User manual for Bakeneko
+- [Bakeneko Privacy Policy](https://www.wtfgames.com.ua/bakeneko-privacy-policy.html): Privacy policy for Bakeneko
+- [Ludorama Privacy Policy](https://www.wtfgames.com.ua/ludorama-privacy-policy.html): Privacy policy for Ludorama
+- [Ludorama Account and Data Deletion](https://www.wtfgames.com.ua/ludorama-data-deletion.html): How to delete a Ludorama account and its data
+- [LumaScope Privacy Policy](https://www.wtfgames.com.ua/lumascope-privacy-policy.html): Privacy policy for LumaScope
+- [WTFGames Privacy Policy](https://www.wtfgames.com.ua/privacy): Privacy policy for the website
+- [WTFGames Terms of Service](https://www.wtfgames.com.ua/terms): Terms of service for the website
