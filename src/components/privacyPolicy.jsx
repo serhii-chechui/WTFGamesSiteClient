@@ -11,9 +11,10 @@ const PrivacyPolicy = () => {
             <h1>Privacy Policy</h1>
             <h2>Privacy Policy</h2>
             <p>
-                This privacy policy applies to the Spaceglider app for mobile devices, together with any related
-                services operated by WatchTheFrameGames (collectively, the "Application"). WatchTheFrameGames is hereby
-                referred to as the "Service Provider".
+                This privacy policy applies to the apps and games for mobile devices published by WatchTheFrameGames,
+                together with any related services (collectively, the "Application"). WatchTheFrameGames is hereby
+                referred to as the "Service Provider". Some apps have their own privacy policy that describes the
+                third-party services they use; where such a policy exists, it applies to that app.
             </p>
             <br />
             <h2>Information Collection and Use</h2>
@@ -59,16 +60,17 @@ const PrivacyPolicy = () => {
             </p>
             <br />
             <p>
-                For a better experience while using the Application, the Service Provider may require you to provide
-                certain personally identifiable information, including but not limited to serhii.chechui@gmail.com. The
-                information the Service Provider requests will be retained and used as described in this privacy policy.
+                The Application does not require you to create an account and does not ask you to provide your name,
+                email address, phone number, or precise location. If you contact the Service Provider by email, the
+                information you include in your message will be retained and used as described in this privacy policy.
             </p>
             <br />
             <h2>Third Party Access</h2>
             <p>
-                Only aggregated, anonymized data is periodically transmitted to external services to aid the Service
-                Provider in improving the Application and their service. The Service Provider may share your information
-                with third parties in the ways that are described in this privacy statement.
+                Only the information needed for the purposes described in this policy is shared with external services
+                to aid the Service Provider in improving the Application and their service. The Service Provider may
+                share your information with third parties only in the ways that are described in this privacy
+                statement. The Service Provider does not sell personal data.
             </p>
             <br />
             <h2>International Data Transfers</h2>
