@@ -4,7 +4,7 @@ description: "Every one of our Unity games used to carry its own BuildScript.cs,
 date: 2026-10-07
 slug: hephaestus-build-unity-build-pipeline
 cover: cover.jpg
-coverAlt: "Illustration of the Hephaestus → Build menu with iOS, Android, macOS and Windows builds"
+coverAlt: "Close-up of a circuit board lit like a city at night, with glowing amber components"
 lang: en
 tags: [Unity, CI/CD, Hephaestus]
 draft: true
