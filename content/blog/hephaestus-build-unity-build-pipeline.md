@@ -7,7 +7,6 @@ cover: cover.jpg
 coverAlt: "Close-up of a circuit board lit like a city at night, with glowing amber components"
 lang: en
 tags: [Unity, CI/CD, Hephaestus]
-draft: true
 ---
 
 Every Unity game we shipped had a file called `BuildScript.cs`. Nobody wrote it from scratch: it was copied from the previous game, renamed a little and patched until the build went through. After a few years VirusHunt, Spaceglider and Robodancer each had their own version, and no two of them did quite the same thing.
